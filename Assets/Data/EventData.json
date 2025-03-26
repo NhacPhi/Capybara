@@ -1,0 +1,85 @@
+{
+  "Start" : [
+    {
+      "$type": "Event_System.StartEvent, Assembly-CSharp",
+      "ID": 101231,
+      "Name": "None",
+      "Description": "Loài Người và Ma Thú đã tán công quê hương của bạn, bạn là người duy nhất sống sót, nhanh cầm vũ khí lên và chiến đấu"
+    }
+  ],
+  "Passive" : [
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": 101,
+      "Name": "Capybara gặp rắc rối",
+      "Description": "Một con Capybara đang bị mắc kẹt trong đầm lầy.",
+      "Modifier" : [
+        {
+          "Attribute" : true,
+          "Value" : 3,
+          "AttributeType" : "Exp"
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": 102,
+      "Name": "Capybara Lạc Đường",
+      "Description": "Capybara đi quá xa bầy đàn và không biết đường trở về.",
+      "Modifier" : [
+        {
+          "Value" : -0.05,
+          "StatType" : "Def",
+          "ModType" : "Percent"
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": 111,
+      "Name": "Capybara Trốn Trong Hang",
+      "Description": "Capybara tìm thấy một hang động an toàn, nơi nó có thể nghỉ ngơi và phục hồi sức mạnh.",
+      "Modifier": [
+        {
+          "Value": 30,
+          "StatType": "MaxHp"
+        },
+        {
+          "Attribute" : true,
+          "Value" : 5,
+          "AttributeType" : "Exp"
+        }
+      ]
+    }
+  ],
+  "Selection" : [
+    {
+      "$type": "Event_System.SelectionEvent, Assembly-CSharp",
+      "ID": 121,
+      "Description": "Tiên Linh Nhỏ: Bạn càn hiến tế để nhận skill",
+      "Option 1" : {
+        "Name" : "Hiến Tế HP",
+        "Modifier": {
+          "Attribute" : true,
+          "Value" : -20,
+          "AttributeType" : "Hp"
+        }
+      },
+      "Option 2" : {
+        "Name" : "Hiến Tế ATK",
+        "Modifier": {
+          "Value" : -10,
+          "StatType" : "Atk"
+        }
+      }
+    }
+  ],
+  "Fight" : [
+    {
+      "$type": "Event_System.CombatEvent, Assembly-CSharp",
+      "ID": 123,
+      "Description": "Phía Trước có kẻ địch chặn đường bạn đành chủ động ra đòn"
+    }
+  ],
+  "Boss" : null
+}

@@ -1,0 +1,22 @@
+{
+    "name": "Stats",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d525ad6bd40672747bde77962f1c401e",
+        "GUID:44a1b6a89a57f9546987428d2bf33114",
+        "GUID:234340c04eed5674a988bc6ebde7d248",
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21",
+        "GUID:7c04f0dfa9243c04681a55d90d3ff3fc",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

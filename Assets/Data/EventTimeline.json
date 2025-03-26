@@ -1,0 +1,20 @@
+[
+  {},{},
+  {
+    "Type" : "SelectionRandom"
+  },
+  {
+    "Type" : "FightRandom"
+  },
+  {},{},
+  {
+    "Type" : "FightRandom"
+  },
+  {},
+  {
+    "Type" : "FightRandom"
+  },
+  {
+    "Type" : "Boss"
+  }
+]
