@@ -1,0 +1,7 @@
+Cache Asset Loading , Release With Key
+
+Example: 
+async Unitask(){
+    await AddressableManager.Instance.LoadAsset<TextAsset>("My Key");
+}
+

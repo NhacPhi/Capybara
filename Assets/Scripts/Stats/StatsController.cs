@@ -114,6 +114,13 @@ namespace Stats
 				var attributeItem = statsHolder.GetAttribute(key);
 				attributes[key].Reset(attributeItem.StartPercent);
 			}
+
+			foreach (var effect in statusEffects)
+			{
+				effect.Stop();
+			}
+			
+			statusEffects.Clear();
 			
 #if UNITY_EDITOR
 			NotifyEditor?.Invoke();

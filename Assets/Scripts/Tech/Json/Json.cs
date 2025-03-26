@@ -20,11 +20,11 @@ namespace Tech.Json
         //public static IEncryption Encryption = new AES(_key, _iv);
         public static IEncryption Encryption;
         
-        public static void SaveJson<T>(this T data, string path)
+        public static void SaveJson<T>(this T data, string path, bool useEncryption = false)
         {
             try{
                 string json = JsonConvert.SerializeObject(data, settings);
-                WriteAllText(path, json);
+                WriteAllText(path, json, useEncryption);
     #if UNITY_EDITOR
                 AssetDatabase.Refresh();
     #endif
@@ -35,13 +35,13 @@ namespace Tech.Json
             }
         }
     
-        public static async void SaveJsonAsync<T>(this T data, string path, Action saveDone = null)
+        public static async void SaveJsonAsync<T>(this T data, string path, Action saveDone = null,  bool useEncryption = false)
         {
             try{
                 await UniTask.RunOnThreadPool(async () =>
                 {
                     string json = JsonConvert.SerializeObject(data, settings);
-                    await WriteAllTextAsync(path, Encryption.Encrypt(json));
+                    await WriteAllTextAsync(path, Encryption.Encrypt(json), useEncryption);
                 });
 
                 saveDone?.Invoke();
@@ -55,13 +55,13 @@ namespace Tech.Json
             }
         }
         
-        public static void LoadJson<T>(string path, out T value)
+        public static void LoadJson<T>(string path, out T value,  bool useEncryption = false)
         {
             try
             {
                 if (File.Exists(path))
                 {
-                    string json = ReadAllText(path);
+                    string json = ReadAllText(path, useEncryption);
                     T data = JsonConvert.DeserializeObject<T>(json, settings);
                     value = data;
                     return;
@@ -76,9 +76,9 @@ namespace Tech.Json
             value = default;
         }
 
-        private static async UniTask WriteAllTextAsync(string path, string text)
+        private static async UniTask WriteAllTextAsync(string path, string text,  bool useEncryption = false)
         {
-            if (Encryption != null)
+            if (Encryption != null && useEncryption)
             {
                 await File.WriteAllTextAsync(path, JsonConvert.SerializeObject(Encryption.Encrypt(text), settings));
                 return;
@@ -87,9 +87,9 @@ namespace Tech.Json
             await File.WriteAllTextAsync(path, text);
         }
 
-        private static void WriteAllText(string path, string text)
+        private static void WriteAllText(string path, string text, bool useEncryption = false)
         {
-            if (Encryption != null)
+            if (Encryption != null && useEncryption)
             {
                 File.WriteAllText(path, JsonConvert.SerializeObject(Encryption.Encrypt(text), settings));
                 return;
@@ -99,9 +99,9 @@ namespace Tech.Json
         }
         
         
-        public static string ReadAllText(string path)
+        public static string ReadAllText(string path, bool useEncryption = false)
         {
-            if (Encryption != null)
+            if (Encryption != null && useEncryption)
             {
                 return Encryption.Decrypt(JsonConvert.DeserializeObject<string>(File.ReadAllText(path), settings));
             }
@@ -109,11 +109,11 @@ namespace Tech.Json
             return File.ReadAllText(path);
         }
 
-        public static T DeserializeObject<T>(string json)
+        public static T DeserializeObject<T>(string json, bool useEncryption = false)
         {
             var newJson = json;
             
-            if (Encryption != null)
+            if (Encryption != null && useEncryption)
             {
                 newJson = Encryption.Decrypt(json);
             }
@@ -121,11 +121,11 @@ namespace Tech.Json
             return JsonConvert.DeserializeObject<T>(newJson, settings);
         }
 
-        public static string SerializeObject<T>(T data)
+        public static string SerializeObject<T>(T data, bool useEncryption = false)
         {
             var json = JsonConvert.SerializeObject(data, settings);
             
-            if (Encryption != null)
+            if (Encryption != null && useEncryption)
             {
                 json = Encryption.Encrypt(json);
             }
