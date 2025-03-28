@@ -56,14 +56,12 @@ namespace Stats.stat
 
     	public bool RemoveModifier(Modifier mod)
     	{
-    		if (_statModifiers.Remove(mod))
-    		{
-    			ReCalculateValue();
-    			OnValueChange?.Invoke(this);
-    			return true;
-    		}
-    		return false;
-    	}
+		    if (!_statModifiers.Remove(mod)) return false;
+		    
+		    ReCalculateValue();
+		    OnValueChange?.Invoke(this);
+		    return true;
+	    }
 
 		public bool RemoveModifierWithoutNotify(Modifier mod)
 		{

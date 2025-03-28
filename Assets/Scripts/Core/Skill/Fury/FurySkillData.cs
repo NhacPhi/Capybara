@@ -2,6 +2,6 @@ namespace Core.Skill
 {
     public class FurySkillData : SkillData
     {
-        public override SkillBase CreateRuntimeSkill() => new Fury(this);
+        public override SkillBase CreateRuntimeSkill(EntityStats owner) => new Fury(owner, this);
     }
 }

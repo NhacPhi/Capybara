@@ -9,6 +9,8 @@ namespace Observer
 {
     public static class PlayerStatusAction
     {
+        //Other
+        public static Action<float> OnMoneyChange;
         
         //Attribute
         public static Action<Attribute> OnLvChange;

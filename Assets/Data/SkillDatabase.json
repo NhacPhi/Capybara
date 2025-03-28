@@ -3,18 +3,35 @@
     "$type": "Core.Skill.ChargeSkillData, Assembly-CSharp",
     "ID" : "skill_01", 
     "Name" : "Charge Skill",
-    "Description" : "Đòn tấn công đầu tiên trong trận tăng 10% sát thương"
+    "Description" : "Đòn tấn công đầu tiên trong trận tăng {0}% sát thương",
+    "Values" : [10]
   },
   {
     "$type": "Core.Skill.FurySkillData, Assembly-CSharp",
     "ID" : "skill_02",
     "Name" : "Fury",
-    "Description" : " Khi HP dưới 50%, sát thương tăng 15%."
+    "Description" : " Khi HP dưới {0}%, sát thương tăng {1}%.",
+    "Values" : [50, 15]
   },
    {
     "$type": "Core.Skill.LastStandData, Assembly-CSharp",
     "ID" : "skill_03",
     "Name" : "Last Stand",
-    "Description" : " Khi HP dưới 30%, DEF tăng gấp đôi trong 2 lượt."
+    "Description" : " Khi HP dưới {0}%, DEF tăng gấp đôi trong {1} lượt.",
+    "Values" : [30, 2]
+  },
+  {
+    "$type": "Core.Skill.RegenerationData, Assembly-CSharp",
+    "ID" : "skill_04",
+    "Name" : "Regeneration",
+    "Description" : "Hồi {0}% HP đã mất vào {1} lượt đầu mỗi trận.",
+    "Values" : [30, 3]
+  },
+  {
+    "$type": "Core.Skill.ResilientHeartData, Assembly-CSharp",
+    "ID" : "skill_05",
+    "Name" : "Resilient Heart",
+    "Description" : "Nếu mất hơn {0}% HP trong một lượt, hồi lại {1}% HP ngay sau đó.",
+    "Values" : [30, 15]
   }
 ]

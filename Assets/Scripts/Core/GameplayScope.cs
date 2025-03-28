@@ -25,7 +25,7 @@ public class GameplayScope : LifetimeScope
             
         //Entry Point
         builder.RegisterEntryPoint<GameplayPreLoad>(Lifetime.Scoped).AsSelf();
-        builder.RegisterEntryPoint<DamagePopup>(Lifetime.Scoped).AsSelf();
+        builder.RegisterEntryPoint<TextCombat>(Lifetime.Scoped).AsSelf();
         builder.RegisterEntryPoint<Gameloop>(Lifetime.Scoped).AsSelf();
         builder.RegisterEntryPoint<EnemyManager>(Lifetime.Scoped).AsSelf();
         

@@ -1,12 +1,10 @@
 using System.Linq;
 using System.Text;
 using Event_System;
-using Stats.M_Attribute;
 using Stats.stat;
 using Tech.Pooling;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class EventHistoryItem : MonoBehaviour
 {
@@ -67,7 +65,7 @@ public class EventHistoryItem : MonoBehaviour
         return this;
     }
 
-    public EventHistoryItem SetValueChange(ModifyValue[] modifyValues)
+    public EventHistoryItem SetValueChange(BaseModifyValue[] modifyValues)
     {
         if(modifyValues == null || modifyValues.Length == 0) return this;
         
@@ -90,11 +88,9 @@ public class EventHistoryItem : MonoBehaviour
         return this;
     }
     
-    private void CreateValueChangeString(StringBuilder stringBuilder, ModifyValue mod)
+    private void CreateValueChangeString(StringBuilder stringBuilder, BaseModifyValue mod)
     {
-        stringBuilder.Append(mod.IsAttribute
-            ? AttributeExtensions.GetName(mod.AttributeType)
-            : StatExtensions.GetName(mod.StatType));
+        stringBuilder.Append(mod.GetNameOfValue());
         
         stringBuilder.Append(' ');
 

@@ -1,30 +1,71 @@
 using System.Collections.Generic;
 using Core.Skill;
+using Observer;
 using Tech.Composite;
+using UnityEngine;
 
 namespace Core.Entities.Common
 {
     public class EntitySkill : CoreComponent
     {
-        private Dictionary<string, SkillBase> skillDict = new ();
-        
+        private Dictionary<string, SkillBase> _skillDict = new ();
+        private EntityStats _entityStats; 
+            
+        protected override void Awake()
+        {
+            base.Awake();
+            GameAction.OnCombatEnd += HandleCombatEnd;
+        }
+
+        private void Start()
+        {
+            _entityStats = core.GetCoreComponent<EntityStats>();
+        }
+
+        private void OnDestroy()
+        {
+            GameAction.OnCombatEnd -= HandleCombatEnd;
+        }
+
+        private void HandleCombatEnd()
+        {
+            foreach (var skill in _skillDict.Values)
+            {
+                if (skill is IResetSkill skillReset)
+                {
+                    skillReset.ResetSkill();
+                }
+            }
+        }
+
         public void AddSkill(SkillData skill)
         {
-            skillDict.Add(skill.ID, skill.CreateRuntimeSkill());            
+            _skillDict.Add(skill.ID, skill.CreateRuntimeSkill(_entityStats));            
         }
         
         public bool HasSkill(string skillID)
         {
-            return skillDict.Count != 0 && skillDict.ContainsKey(skillID);
+            return _skillDict.Count != 0 && _skillDict.ContainsKey(skillID);
         }
 
         public void ApplyAttackSkill(ref float damage, EntityStats source)
         {
-            foreach (var skill in skillDict.Values)
+            foreach (var skill in _skillDict.Values)
             {
-                if (skill.GetSkillType() == SkillType.Attack)
+                if (skill is IAttackSkill attackSkill)
                 {
-                    skill.OnDamageOutput(ref damage, source);
+                    attackSkill.OnDealDamage(ref damage);
+                }
+            }
+        }
+
+        public void ApplyDefenseSkill(ref float damage, Transform attacker, EntityStats source)
+        {
+            foreach (var skill in _skillDict.Values)
+            {
+                if (skill is IDefenseSkill defenseSkill)
+                {
+                    defenseSkill.OnDamaged(attacker, ref damage);
                 }
             }
         }

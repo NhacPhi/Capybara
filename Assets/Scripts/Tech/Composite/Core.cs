@@ -46,7 +46,7 @@ namespace Tech.Composite
             if (comp)
                 return comp;
 
-            LogCommon.LogWarning($"{typeof(T)} not found on {transform.name}");
+            //LogCommon.LogWarning($"{typeof(T)} not found on {transform.name}");
             return null;
         }
 

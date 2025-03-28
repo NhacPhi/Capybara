@@ -1,5 +1,4 @@
-﻿using Core;
-using Observer;
+﻿using Observer;
 using Stats.M_Attribute;
 using Stats.stat;
 using UnityEngine;
@@ -8,10 +7,27 @@ namespace Core.Entities.Player
 {
     public class PlayerStats : EntityStats
     {
+        public float Money
+        {
+            get => _money;
+            set
+            {
+                _money = value;
+                PlayerStatusAction.OnMoneyChange?.Invoke(_money);
+            }
+        }
+        public float _money;
+        
         public override void LoadComponent()
         {
             base.LoadComponent();
             CallEvent();
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            Money = 0;
         }
 
         private void CallEvent()

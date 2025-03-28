@@ -1,5 +1,6 @@
 using Observer;
 using Tech.State_Machine;
+using Unity.VisualScripting;
 
 namespace Core.GameLoop
 {
@@ -12,8 +13,8 @@ namespace Core.GameLoop
     
     public class CombatState : GameStateBase
     {
-        private int _curRound;
-        private int maxRound = 30;
+        public static int CurRound { get; private set; }
+        public static int maxRound { get; private set; } = 30;
         private bool _isPlayerTurn;
         private Turn _currentTurn;
         private Turn _nextTurn;
@@ -51,9 +52,9 @@ namespace Core.GameLoop
         public override void Enter()
         {
             base.Enter();
-            _curRound = 1;
+            CurRound = 1;
             _nextTurn = Turn.PlayerTurn;
-            GameAction.OnRoundChange?.Invoke(_curRound, maxRound);
+            GameAction.OnRoundChange?.Invoke(CurRound, maxRound);
         }
 
         public override void Exit()
@@ -75,8 +76,8 @@ namespace Core.GameLoop
                 case Turn.PlayerTurn:
                     if (_currentTurn == Turn.EnemyTurn)
                     {
-                        _curRound++;
-                        GameAction.OnRoundChange?.Invoke(_curRound, maxRound);
+                        CurRound++;
+                        GameAction.OnRoundChange?.Invoke(CurRound, maxRound);
                     }
                     GameAction.OnPlayerTurnStart?.Invoke();
                     break;

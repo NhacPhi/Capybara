@@ -1,5 +1,6 @@
 using System.Text;
 using Core.Entities.Common;
+using Core.Entities.Player;
 using Newtonsoft.Json;
 using Observer;
 using Stats;
@@ -40,54 +41,52 @@ namespace Event_System
             selectionBtn.Title_TMP.text = option.Name;
             var modifier = option.ModifyValue;
             var stringBuilder = GenericPool<StringBuilder>.Get().Clear();
-            var playerStat = manager.Player.GetComponent<StatsController>();
+            var playerStats = manager.Player.GetComponent<PlayerStats>();
             var playerSkill = manager.Player.GetCoreComponent<EntitySkill>();
-                
-            if (modifier.IsAttribute)
+
+            selectionBtn.Btn.onClick.RemoveAllListeners();
+            switch (modifier)
             {
-                var attributeName = AttributeExtensions.GetName(modifier.AttributeType);
-                selectionBtn.Btn.onClick.RemoveAllListeners();
-                selectionBtn.Btn.onClick.AddListener(() =>
-                {
-                    var attribute = playerStat.GetAttribute(modifier.AttributeType);
-                    switch (modifier.ModType)
+                //Closure allocation
+                case AttributeModify attributeModify:
+                    selectionBtn.Btn.onClick.AddListener(() =>
                     {
-                        case ModifyType.Percent:
-                            attribute.Value *= (1 + modifier.Value);
-                            break;
-                        default:
-                            attribute.Value += modifier.Value;
-                            break;
-                    }
-                    GameAction.OnPlayerSelect?.Invoke();
-                    var panel = manager.UIManager.GetFirstPanelOfType<ChooseSkillPanel>();
-                    panel.Show();
-                    panel.Populate(playerSkill);
-                });
-                BuildingText(stringBuilder, attributeName, modifier);
-            }
-            else
-            {
-                var statName = StatExtensions.GetName(modifier.StatType);
-                selectionBtn.Btn.onClick.RemoveAllListeners();
-                selectionBtn.Btn.onClick.AddListener(() =>
-                {
-                    playerStat.AddModifier(modifier.StatType, new Modifier(modifier.Value, modifier.ModType));
-                    GameAction.OnPlayerSelect?.Invoke();
-                    var panel = manager.UIManager.GetPanel<ChooseSkillPanel>(AddressConstant.ChooseSkillPanel);
-                    panel.Show();
-                    panel.Populate(playerSkill);
-                });
-                BuildingText(stringBuilder, statName, modifier);
+                        EventUtil.HandleAttribute(attributeModify, playerStats);
+                        PopulatePanel(manager.UIManager, playerSkill);
+                    });
+                    break;
+                case StatModify statModify:
+                    selectionBtn.Btn.onClick.AddListener(() =>
+                    {
+                        EventUtil.HandleStat(statModify, playerStats);
+                        PopulatePanel(manager.UIManager, playerSkill);
+                    });
+                    break;
+                case MoneyModify moneyModify:
+                    selectionBtn.Btn.onClick.AddListener(() =>
+                    {
+                        EventUtil.HandleMoney(moneyModify, playerStats);
+                        PopulatePanel(manager.UIManager, playerSkill);
+                    });
+                    break;
             }
             
+            BuildingText(stringBuilder, modifier);
             selectionBtn.ValueChange_TMP.text = stringBuilder.ToString();
             GenericPool<StringBuilder>.Return(stringBuilder);
         }
 
-        private void BuildingText(StringBuilder stringBuilder, string valueName, ModifyValue modifier)
+        private void PopulatePanel(UIManager uiManager, EntitySkill skill)
         {
-            stringBuilder.Append(valueName);
+            GameAction.OnPlayerSelect?.Invoke();
+            var panel = uiManager.GetFirstPanelOfType<ChooseSkillPanel>();
+            panel.Show();
+            panel.Populate(skill);
+        }
+        
+        private void BuildingText(StringBuilder stringBuilder, BaseModifyValue modifier)
+        {
+            stringBuilder.Append(modifier.GetNameOfValue());
             stringBuilder.Append(' ');
                 
             if (modifier.Value > 0)
@@ -109,6 +108,6 @@ namespace Event_System
         [JsonProperty("Name")]
         public string Name { get; private set; }
         [JsonProperty("Modifier")]
-        public ModifyValue ModifyValue { get; private set; }
+        public BaseModifyValue ModifyValue { get; private set; }
     }
 }

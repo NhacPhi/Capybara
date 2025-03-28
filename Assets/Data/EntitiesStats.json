@@ -16,8 +16,8 @@
         },
         "enemy_01": {
             "Stat": {
-                "Atk": 40,
-                "MaxHp": 100,
+                "Atk": 200,
+                "MaxHp": 10000,
                 "Def": 20
             },
             "Attribute": {

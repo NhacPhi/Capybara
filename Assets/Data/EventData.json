@@ -10,44 +10,252 @@
   "Passive" : [
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
-      "ID": 101,
-      "Name": "Capybara gặp rắc rối",
-      "Description": "Một con Capybara đang bị mắc kẹt trong đầm lầy.",
-      "Modifier" : [
-        {
-          "Attribute" : true,
-          "Value" : 3,
-          "AttributeType" : "Exp"
-        }
-      ]
-    },
-    {
-      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
-      "ID": 102,
-      "Name": "Capybara Lạc Đường",
-      "Description": "Capybara đi quá xa bầy đàn và không biết đường trở về.",
-      "Modifier" : [
-        {
-          "Value" : -0.05,
-          "StatType" : "Def",
-          "ModType" : "Percent"
-        }
-      ]
-    },
-    {
-      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
-      "ID": 111,
-      "Name": "Capybara Trốn Trong Hang",
-      "Description": "Capybara tìm thấy một hang động an toàn, nơi nó có thể nghỉ ngơi và phục hồi sức mạnh.",
+      "ID": "passive_01",
+      "Description": "Stepped on a Thorn",
       "Modifier": [
         {
-          "Value": 30,
-          "StatType": "MaxHp"
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Hp",
+          "Value": -20
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_02",
+      "Description": "Found a Shiny Coin",
+      "Modifier": [
+        {
+          "$type": "Event_System.MoneyModify, Assembly-CSharp",
+          "Value": 250
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_03",
+      "Description": "Challenged by a Squirrel",
+      "Modifier": [
+        {
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Hp",
+          "Value": -10
         },
         {
-          "Attribute" : true,
-          "Value" : 5,
-          "AttributeType" : "Exp"
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Exp",
+          "Value": 20
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_04",
+      "Description": "Tasty Leaves Buffet",
+      "Modifier": [
+        {
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Hp",
+          "Value": 25
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_05",
+      "Description": "Fell from a Small Rock",
+      "Modifier": [
+        {
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Hp",
+          "Value": -15
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_06",
+      "Description": "Training with a Tree Trunk",
+      "Modifier": [
+        {
+          "$type": "Event_System.StatModify, Assembly-CSharp",
+          "StatType": "Atk",
+          "Value": 10
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_07",
+      "Description": "Got Stung by Bees",
+      "Modifier": [
+        {
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Hp",
+          "Value": -10
+        },
+        {
+          "$type": "Event_System.StatModify, Assembly-CSharp",
+          "StatType": "Def",
+          "Value": -10
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_08",
+      "Description": "Helped a Lost Bird",
+      "Modifier": [
+        {
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Exp",
+          "Value": 30
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_09",
+      "Description": "Rusty Armor Discovery",
+      "Modifier": [
+        {
+          "$type": "Event_System.StatModify, Assembly-CSharp",
+          "StatType": "Def",
+          "Value": 10
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_10",
+      "Description": "Hidden Berry Stash",
+      "Modifier": [
+        {
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Hp",
+          "Value": 40
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_11",
+      "Description": "Won a Log-Pushing Contest",
+      "Modifier": [
+        {
+          "$type": "Event_System.StatModify, Assembly-CSharp",
+          "StatType": "Atk",
+          "Value": 30
+        },
+        {
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Exp",
+          "Value": 30
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_12",
+      "Description": "Sold Shiny Pebbles",
+      "Modifier": [
+        {
+          "$type": "Event_System.MoneyModify, Assembly-CSharp",
+          "Value": 300
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_13",
+      "Description": "Discovered Ancient Capy Scrolls",
+      "Modifier": [
+        {
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Exp",
+          "Value": 80
+        },
+        {
+          "$type": "Event_System.StatModify, Assembly-CSharp",
+          "StatType": "Def",
+          "Value": 20
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_14",
+      "Description": "Found a Buried Treasure Box",
+      "Modifier": [
+        {
+          "$type": "Event_System.MoneyModify, Assembly-CSharp",
+          "Value": 600
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_15",
+      "Description": "Mastered Bamboo Smashing",
+      "Modifier": [
+        {
+          "$type": "Event_System.StatModify, Assembly-CSharp",
+          "StatType": "Atk",
+          "Value": 50
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_16",
+      "Description": "Capybara Enlightenment",
+      "Modifier": [
+        {
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Exp",
+          "Value": 150
+        },
+        {
+          "$type": "Event_System.StatModify, Assembly-CSharp",
+          "StatType": "Atk",
+          "Value": 30
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_17",
+      "Description": "Golden Leaf Miracle",
+      "Modifier": [
+        {
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Hp",
+          "Value": 50
+        },
+        {
+          "$type": "Event_System.MoneyModify, Assembly-CSharp",
+          "Value": 800
+        }
+      ]
+    },
+    {
+      "$type": "Event_System.PassiveEvent, Assembly-CSharp",
+      "ID": "passive_18",
+      "Description": "Blessing of the Forest Spirits",
+      "Modifier": [
+        {
+          "$type": "Event_System.StatModify, Assembly-CSharp",
+          "StatType": "Atk",
+          "Value": 30
+        },
+        {
+          "$type": "Event_System.StatModify, Assembly-CSharp",
+          "StatType": "Def",
+          "Value": 30
+        },
+        {
+          "$type": "Event_System.MoneyModify, Assembly-CSharp",
+          "Value": 1000
         }
       ]
     }
@@ -55,12 +263,12 @@
   "Selection" : [
     {
       "$type": "Event_System.SelectionEvent, Assembly-CSharp",
-      "ID": 121,
+      "ID": "select_01",
       "Description": "Tiên Linh Nhỏ: Bạn càn hiến tế để nhận skill",
       "Option 1" : {
         "Name" : "Hiến Tế HP",
         "Modifier": {
-          "Attribute" : true,
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
           "Value" : -20,
           "AttributeType" : "Hp"
         }
@@ -68,6 +276,7 @@
       "Option 2" : {
         "Name" : "Hiến Tế ATK",
         "Modifier": {
+          "$type": "Event_System.StatModify, Assembly-CSharp",
           "Value" : -10,
           "StatType" : "Atk"
         }

@@ -1,30 +1,31 @@
 namespace Core.Skill
 {
-    public class Charge : SkillBase
+    public class Charge : SkillBase, IAttackSkill, IResetSkill
     {
         private ChargeSkillData _skillData;
-        public bool IsFirstAttack { get; private set;}
-        public Charge(ChargeSkillData skillData)
+
+        public Charge(EntityStats owner, ChargeSkillData skillData) : base(owner)
         {
             _skillData = skillData;
             IsFirstAttack = true;
         }
 
-        public override SkillType GetSkillType() => SkillType.Attack;
-        
+        public bool IsFirstAttack { get; private set;}
+
         public override SkillData GetSkillData() => _skillData;
 
-        public override void WhenApplySkil(EntityStats source)
-        {
-            //Ignore
-        }
-
-        public override void OnDamageOutput(ref float damageInput, EntityStats source)
+        public void OnDealDamage(ref float damageInput)
         {
             if(!IsFirstAttack) return;
-
-            damageInput *= (1 + 0.1f);
+            
+            float damagePercentAdd = _skillData.Values[0]; 
+            damageInput *= (1 +  damagePercentAdd / 100);
             IsFirstAttack = false;
+        }
+
+        public void ResetSkill()
+        {
+            IsFirstAttack = true;
         }
     }
 }

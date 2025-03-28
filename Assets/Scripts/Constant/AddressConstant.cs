@@ -1,5 +1,3 @@
-using Stats;
-
 public static class AddressConstant
 {
 	public static readonly string EntitiesStats = "EntitiesStats";

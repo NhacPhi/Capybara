@@ -1,5 +1,5 @@
+using Core.Entities.Player;
 using Newtonsoft.Json;
-using Stats;
 using Stats.M_Attribute;
 using Stats.stat;
 
@@ -10,7 +10,8 @@ namespace Event_System
         public override EventType Type => EventType.Passive;
 
         [JsonProperty("Modifier")]
-        public ModifyValue[] ModifyValues { get; private set; } = null;
+        public BaseModifyValue[] ModifyValues { get; private set; } = null;
+        
         public override void HandleEvent(EventManager manager)
         {
             EventHistory eventHistory = manager.EventHistory;
@@ -22,88 +23,42 @@ namespace Event_System
             
             if(ModifyValues == null) return;
             
-            if(!manager.Player.TryGetComponent(out StatsController playerStats)) return;
+            if(!manager.Player.TryGetComponent(out PlayerStats playerStats)) return;
             
-            FintLastAttributeAndStatIndex(out var lastAttributeIndex, out var lastStatIndex);
-            
-            for (var i = 0; i < this.ModifyValues.Length; i++)
+            foreach (BaseModifyValue modifier in ModifyValues)
             {
-                var modifier = this.ModifyValues[i];
-               
-                if (modifier.IsAttribute)
-                {
-                    var attribute = playerStats.GetAttribute(modifier.AttributeType);
-                    float newValue = 0;
-                    switch (modifier.ModType)
-                    {
-                        case ModifyType.Percent:
-                            newValue = attribute.Value * (1 + modifier.Value);
-                            break;
-                        default:
-                            newValue = attribute.Value + modifier.Value;
-                            break;
-                    }
-
-                    if (i == lastAttributeIndex)
-                    {
-                        attribute.Value = newValue;   
-                    }
-                    else
-                    {
-                        attribute.SetValueWithoutNotify(newValue);
-                    }
-                    continue;
-                }
-                
-                Modifier statMod = new Modifier()
-                {
-                    Type = modifier.ModType,
-                    Value = modifier.Value
-                };
-                
-                if (i == lastStatIndex)
-                {
-                    playerStats.AddModifier(modifier.StatType, statMod);
-                }
-                else
-                {
-                    playerStats.AddModifierWithoutNotify(modifier.StatType, statMod);
-                }
-            }
-        }
-
-        private void FintLastAttributeAndStatIndex(out int lastAttributeIndex, out int lastStatIndex)
-        {
-            lastAttributeIndex = 0;
-            lastStatIndex = 0;
-
-            for (int i = 0; i < this.ModifyValues.Length; i++)
-            {
-                var mod = ModifyValues[i];
-                
-                if (mod.IsAttribute)
-                {
-                    lastAttributeIndex = i;
-                }
-                else
-                {
-                    lastStatIndex = i;
-                }
+                EventUtil.HandleModify(modifier, playerStats);
             }
         }
     }
-
-    public class ModifyValue
+    
+    public abstract class BaseModifyValue
     {
-        [JsonProperty("Attribute")]
-        public bool IsAttribute;
         [JsonProperty("Value")]
         public float Value;
         [JsonProperty("ModType")]
         public ModifyType ModType = ModifyType.Constant;
+        public abstract string GetNameOfValue();
+    }
+
+    public class AttributeModify : BaseModifyValue
+    {
         [JsonProperty("AttributeType")]
         public AttributeType AttributeType;
+        public override string GetNameOfValue() => AttributeExtensions.GetName(AttributeType);
+    }
+
+    public class StatModify : BaseModifyValue
+    {
         [JsonProperty("StatType")]
         public StatType StatType;
+
+        public override string GetNameOfValue() => StatExtensions.GetName(StatType);
+    }
+
+    public class MoneyModify : BaseModifyValue
+    {
+        public const string Money = "Money";
+        public override string GetNameOfValue() => Money;
     }
 }
