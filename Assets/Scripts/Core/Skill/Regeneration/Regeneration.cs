@@ -1,9 +1,10 @@
+using System;
 using Observer;
 using Stats.M_Attribute;
 
 namespace Core.Skill
 {
-    public class Regeneration : SkillBase
+    public class Regeneration : SkillBase, IDisposable
     {
         protected RegenerationData data;
         protected int activeRemaining;
@@ -15,20 +16,22 @@ namespace Core.Skill
             GameAction.OnStartCombat += HandleStart;
         }
 
-        ~Regeneration()
+        public void Dispose()
         {
             GameAction.OnStartCombat -= HandleStart;
         }
-        
+
         private void HandleStart()
         {
+            if(activeRemaining == 0) return;
             var hp = this.owner.GetAttribute(AttributeType.Hp);
             var hpPercentHeal = data.Values[0] / 100;
-            hp.Value *= (1 + hpPercentHeal);
+            float hpLost = hp.MaxValue - hp.Value;
+            float hpHeal = hpLost * hpPercentHeal;
+            hp.Value += hpHeal;
+            this.owner.TextCombat.CreateHealPopup(hpHeal, this.owner.transform.position);
             activeRemaining--;
         }
-
-        
         
         public override SkillData GetSkillData() => this.data;
         

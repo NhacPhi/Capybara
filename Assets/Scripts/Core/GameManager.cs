@@ -1,6 +1,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tech.Singleton;
+using UnityEngine.Device;
 
 namespace Core
 {
@@ -8,9 +9,11 @@ namespace Core
     {
         public static CancellationToken GlobalTokenOnDestroy => 
             Instance.GetCancellationTokenOnDestroy();
+        
         protected override void Awake()
         {
             base.Awake();
+            Application.targetFrameRate = 60;
         }
     }
 }

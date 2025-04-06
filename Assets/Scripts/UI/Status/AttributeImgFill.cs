@@ -45,9 +45,9 @@ namespace UI
         {
             float ratio = this.LastValue / this.LastMaxValue;
             var stringBuilder = GenericPool<StringBuilder>.Get().Clear();
-            stringBuilder.Append(this.LastValue);
+            stringBuilder.Append(Mathf.CeilToInt(this.LastValue));
             stringBuilder.Append('/');
-            stringBuilder.Append(this.LastMaxValue);
+            stringBuilder.Append(Mathf.CeilToInt(this.LastMaxValue));
             textValue.text = stringBuilder.ToString();
             GenericPool<StringBuilder>.Return(stringBuilder);
             fillImageValue.fillAmount = ratio;

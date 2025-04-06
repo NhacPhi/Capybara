@@ -16,7 +16,7 @@ namespace Stats
 	{
 		protected StatsDataHolder statsHolder;
 		[field: SerializeField] public string EntityID { get; protected set;}
-		[Inject] protected DataService dataService;
+		[Inject] protected EntitiesStatsDataBase DataBase;
 		protected Dictionary<StatType, Stat> stats;
 		protected Dictionary<AttributeType, Attribute> attributes;
 		protected List<StatusEffect> statusEffects = new ();
@@ -50,8 +50,7 @@ namespace Stats
 
 			if (statsHolder == null)
 			{
-				if(!dataService.TryGetData<EntitiesStatsDataBase>(addressKey, out var dictData)) return;
-				statsHolder = dictData.EntitiesStats[EntityID];
+				statsHolder = DataBase.EntitiesStats[EntityID];
 			}
 
 			InitStats();
@@ -82,8 +81,7 @@ namespace Stats
 			
 			if (statsHolder == null)
 			{
-				if(!dataService.TryGetData<EntitiesStatsDataBase>(addressKey, out var dictData)) return;
-				statsHolder = dictData.EntitiesStats[EntityID];
+				statsHolder = DataBase.EntitiesStats[EntityID];
 			}
 			
 			stats = new Dictionary<StatType, Stat>();

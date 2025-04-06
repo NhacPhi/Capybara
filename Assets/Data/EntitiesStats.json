@@ -1,28 +1,26 @@
 {
-    "Entities Stats": {
-        "player_01": {
-            "Stat": {
-                "Atk": 100,
-                "MaxHp": 400,
-                "Def": 25,
-                "ExpToLevelUp": 10,
-                "MaxLv" : 1000
-            },
-            "Attribute": {
-                "Hp": { "Max": "MaxHp" },
-                "Exp": { "Max" : "ExpToLevelUp" , "StartPercent" :  0.1},
-                "Lv" : {"Max" : "MaxLv", "StartPercent" :  0.001 }
-            }
+    "player_01": {
+        "Stat": {
+            "Atk": 100,
+            "MaxHp": 400,
+            "Def": 25,
+            "ExpToLevelUp": 10,
+            "MaxLv" : 1000
         },
-        "enemy_01": {
-            "Stat": {
-                "Atk": 200,
-                "MaxHp": 10000,
-                "Def": 20
-            },
-            "Attribute": {
-                "Hp": { "Max": "MaxHp" }
-            }
+        "Attribute": {
+            "Hp": { "Max": "MaxHp" },
+            "Exp": { "Max" : "ExpToLevelUp" , "StartPercent" :  0.1},
+            "Lv" : {"Max" : "MaxLv", "StartPercent" :  0.001 }
+        }
+    },
+    "enemy_01": {
+        "Stat": {
+            "Atk": 50,
+            "MaxHp": 300,
+            "Def": 20
+        },
+        "Attribute": {
+            "Hp": { "Max": "MaxHp" }
         }
     }
 }

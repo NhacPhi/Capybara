@@ -1,3 +1,4 @@
+using System;
 using Observer;
 using Stats.M_Attribute;
 using Stats.stat;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace Core.Skill
 {
-    public class LastStand : SkillBase, IDefenseSkill, IResetSkill
+    public class LastStand : SkillBase, IDefenseSkill, IResetSkill, IDisposable
     {
         private LastStandData data;
         private bool _isActive;
@@ -16,6 +17,11 @@ namespace Core.Skill
         {
             this.data = data;
             GameAction.OnRoundChange += HandleRoundChange;
+        }
+        
+        public void Dispose()
+        {
+            GameAction.OnRoundChange -= HandleRoundChange;
         }
         
         private void HandleRoundChange(int curRound, int maxRound)
@@ -54,5 +60,6 @@ namespace Core.Skill
             _isActive = false;
             _defStat = null;
         }
+
     }
 }

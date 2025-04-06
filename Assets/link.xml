@@ -1,0 +1,19 @@
+<linker>
+    <!-- Giữ lại toàn bộ generic Dictionary -->
+    <assembly fullname="mscorlib">
+        <type fullname="System.Collections.Generic.Dictionary`2" preserve="all"/>
+        <type fullname="System.Collections.Generic.Dictionary`2" preserve="all"/>
+        <type fullname="System.Collections.ObjectModel.ReadOnlyDictionary`2" preserve="all"/>
+    </assembly>
+
+    <!-- Giữ lại Newtonsoft.Json -->
+    <assembly fullname="Newtonsoft.Json">
+        <type fullname="Newtonsoft.Json.JsonConverter" preserve="all"/>
+        <type fullname="Newtonsoft.Json.JsonConverter`1" preserve="all"/>
+        <type fullname="Newtonsoft.Json.JsonSerializerSettings" preserve="all"/>
+        <type fullname="Newtonsoft.Json.JsonSerializer" preserve="all"/>
+        <type fullname="Newtonsoft.Json.JsonConvert" preserve="all"/>
+        <type fullname="Newtonsoft.Json.Serialization.JsonSerializerInternalReader" preserve="all"/>
+    </assembly>
+    
+</linker>

@@ -42,7 +42,9 @@ namespace Core.Entities.Player
             if(enemy == null) return;
        
             Vector3 oldPosition = transform.position;
-            transform.DOMove(enemy.transform.position - Vector3.right, timeToMove);   
+            Vector3 targetPosition = transform.position;
+            targetPosition.x = enemy.transform.position.x;
+            transform.DOMove(targetPosition - Vector3.right, timeToMove);   
             await UniTask.WaitForSeconds(timeToMove, cancellationToken: cancelToken);
 
             if (enemy.TryGetComponent(out IDamagable damagable))

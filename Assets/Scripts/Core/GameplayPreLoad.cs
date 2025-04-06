@@ -16,6 +16,7 @@ public class GameplayPreLoad : IAsyncStartable
     [Inject] private EventManager _eventManager;
     [Inject] private SkillDatabase _skillDatabase;
     [Inject] private EnemyManager _enemyManager;
+    [Inject] EntitiesStatsDataBase _entitiesStatsData;
     [Inject] private IObjectResolver _objectResolver;
     
     public bool IsLoadDone;
@@ -29,9 +30,9 @@ public class GameplayPreLoad : IAsyncStartable
 
         var tasks = new List<UniTask>()
         {
-            _dataService.LoadDataAsync<EntitiesStatsDataBase>(AddressConstant.EntitiesStats, cancellation),
             _skillDatabase.Init(cancellation),
             _enemyManager.Init(cancellation),
+            _entitiesStatsData.Init()
         };
         
         _eventManager.Init(tasks, cancellation);

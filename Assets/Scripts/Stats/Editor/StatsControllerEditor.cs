@@ -26,7 +26,7 @@ namespace Stats.Editor
 		
 		private string _search;
 		private string text;
-		private EntitiesStatsDataBase dataBase;
+		private Dictionary<string, StatsDataHolder> dataBase;
 		private StatsDataHolder statsHolder;
 		private SerializedProperty _idProperty;
 		public override VisualElement CreateInspectorGUI()
@@ -47,7 +47,7 @@ namespace Stats.Editor
 			{
 				return null;
 			}
-			dataBase = Json.DeserializeObject<EntitiesStatsDataBase>(text);
+			dataBase = Json.DeserializeObject<Dictionary<string, StatsDataHolder>>(text);
 			
 			StringSearch search = ScriptableObject.CreateInstance<StringSearch>();
 			search.Keys = new List<string>();
@@ -57,7 +57,7 @@ namespace Stats.Editor
 				_idProperty.serializedObject.ApplyModifiedProperties();
 			};
 			
-			foreach(var key in dataBase.EntitiesStats.Keys){
+			foreach(var key in dataBase.Keys){
 				search.Keys.Add(key);
 			}
 
@@ -91,7 +91,7 @@ namespace Stats.Editor
 			serializedObject.Update();
 			_Body.Clear();
 
-			if(!dataBase.EntitiesStats.TryGetValue(_idProperty.stringValue, out statsHolder)){
+			if(!dataBase.TryGetValue(_idProperty.stringValue, out statsHolder)){
 				_Body.Add(new HelpBox(_errorMessage, HelpBoxMessageType.Error));
 				return;
 			}

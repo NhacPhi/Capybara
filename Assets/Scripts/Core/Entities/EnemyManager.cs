@@ -18,7 +18,7 @@ namespace Core.Entities
         
         //Test
         private const string _enemyAddress = "enemy_01";
-        private Vector3 _enemySpawnPos = new Vector3(1.59f, 2.281f, 0);
+        private Vector3 _enemySpawnPos = new Vector3(1.4f, 2.68f, 0);
         
         public PlayerCtrl Player;
         

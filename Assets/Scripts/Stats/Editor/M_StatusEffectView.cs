@@ -1,6 +1,6 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
-using Stats.stat;
 using Stats.Status_Effect;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -125,3 +125,4 @@ namespace Stats.Editor
 		}
 	}
 }
+#endif

@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using Stats.M_Attribute;
@@ -60,12 +59,7 @@ namespace UI
 
         protected virtual void SetTextValue()
         {
-            var stringBuilder = GenericPool<StringBuilder>.Get().Clear();
-            stringBuilder.Append(this.LastValue);
-            stringBuilder.Append('/');
-            stringBuilder.Append(this.LastMaxValue);
-            textValue.text = stringBuilder.ToString();
-            GenericPool<StringBuilder>.Return(stringBuilder);
+            textValue.text = Mathf.CeilToInt(this.LastValue).ToString();
         }
     }
 }

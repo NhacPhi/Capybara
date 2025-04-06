@@ -28,7 +28,6 @@ namespace Tech.Json
         private async UniTask<T> LoadWithAddressable<T>(string addressableKey, CancellationToken token, Action<T> onComplete) where T : class
         {
             var textAsset = await AddressablesManager.Instance.LoadAssetAsync<TextAsset>(addressableKey, token: token);
-
             var data = Json.DeserializeObject<T>(textAsset.text);
             
             onComplete?.Invoke(data);

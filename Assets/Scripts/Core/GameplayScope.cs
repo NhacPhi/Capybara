@@ -4,8 +4,8 @@ using Core.Entities.Player;
 using Core.GameLoop;
 using Core.Skill;
 using Cysharp.Threading.Tasks;
+using Stats;
 using Tech.Json;
-using Tech.Pooling;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -19,6 +19,7 @@ public class GameplayScope : LifetimeScope
         builder.Register<DataService>(Lifetime.Scoped);
         builder.Register<EventManager>(Lifetime.Scoped);
         builder.Register<SkillDatabase>(Lifetime.Scoped);
+        builder.Register<EntitiesStatsDataBase>(Lifetime.Scoped);
         
         //Hierarchy
         builder.RegisterComponentInHierarchy<UIManager>().AsSelf();

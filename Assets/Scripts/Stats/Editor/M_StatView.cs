@@ -1,3 +1,4 @@
+#if  UNITY_EDITOR
 using Stats.stat;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -102,3 +103,4 @@ namespace Stats.Editor
 		}
 	}
 }
+#endif

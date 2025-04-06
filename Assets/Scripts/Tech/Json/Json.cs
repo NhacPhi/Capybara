@@ -14,7 +14,7 @@ namespace Tech.Json
         private static JsonSerializerSettings settings = new JsonSerializerSettings()
         {
             TypeNameHandling = TypeNameHandling.Auto,
-            Formatting = Formatting.Indented
+            Formatting = Formatting.Indented,
         };
 
         //public static IEncryption Encryption = new AES(_key, _iv);

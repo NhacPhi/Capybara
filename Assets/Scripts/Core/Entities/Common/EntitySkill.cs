@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Core.Skill;
 using Observer;
@@ -25,6 +26,13 @@ namespace Core.Entities.Common
         private void OnDestroy()
         {
             GameAction.OnCombatEnd -= HandleCombatEnd;
+            foreach (var skill in _skillDict.Values)
+            {
+                if (skill is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+            }
         }
 
         private void HandleCombatEnd()

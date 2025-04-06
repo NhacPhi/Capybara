@@ -1,0 +1,5 @@
+org.gradle.jvmargs=-Xmx**JVM_HEAP_SIZE**M
+org.gradle.parallel=true
+unityStreamingAssets=**STREAMING_ASSETS**
+android.aapt2FromMavenOverride=C:/Users/longh/AppData/Local/Android/Sdk/build-tools/36.0.0/aapt2.exe
+**ADDITIONAL_PROPERTIES**

@@ -1,11 +1,20 @@
-using System.Collections.ObjectModel;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using Tech.Json;
+using UnityEngine;
 
 namespace Stats
 {
     public class EntitiesStatsDataBase
     {
-        [JsonProperty("Entities Stats")]
-        public ReadOnlyDictionary<string, StatsDataHolder> EntitiesStats { get; private set; }
+        public Dictionary<string, StatsDataHolder> EntitiesStats { get; private set; }
+
+        public async UniTask Init()
+        {
+            string key = "EntitiesStats";
+            var textAsset = await AddressablesManager.Instance.LoadAssetAsync<TextAsset>(key);
+            EntitiesStats = Json.DeserializeObject<Dictionary<string, StatsDataHolder>>(textAsset.text);
+            AddressablesManager.Instance.RemoveAsset(key);
+        }
     }
 }
