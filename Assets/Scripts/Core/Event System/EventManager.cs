@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using Core.Entities.Player;
@@ -54,7 +55,7 @@ public class EventManager
         var timeLineType = EventTimeLine.NextDay();
         
         EventBase evt = null;
-        
+        Action callback = null;
         switch (timeLineType)
         {
             case TimeLineType.PassiveRandom:
@@ -62,11 +63,10 @@ public class EventManager
                 break;
             case TimeLineType.SpecialRandom:
                 evt = _eventDatabase.GetRandomEvent(EventType.Special);
-                GameAction.OnSelectionEvent?.Invoke();
                 break;
             case TimeLineType.FightRandom:
                 evt = _eventDatabase.GetRandomEvent(EventType.Fight);
-                GameAction.OnStartCombat?.Invoke();
+                callback = GameAction.OnStartCombat;
                 break;
             case TimeLineType.Boss:
                 evt = _eventDatabase.GetRandomEvent(EventType.Boss);
@@ -74,6 +74,6 @@ public class EventManager
         }
         
         _objectResolver.Inject(evt);
-        GameAction.OnEvent?.Invoke(evt);
+        GameAction.OnEvent?.Invoke(evt, callback);
     }
 }

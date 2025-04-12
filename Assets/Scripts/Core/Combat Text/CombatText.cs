@@ -6,12 +6,10 @@ using VContainer.Unity;
 
 namespace Core
 {
-    public class TextCombat : IInitializable, IDisposable
+    public class CombatText : IInitializable, IDisposable, IDamagePopup, IHealPopup
     {
         public const string Address = "Damage Popup";
         private CombatTextUI popupPrefab;
-        public static readonly Color DamagePopupColor = Color.white;
-        public static readonly Color HealPopupColor = Color.green;
 
         public void Initialize()
         {
@@ -34,15 +32,17 @@ namespace Core
             var clone = PoolManager.Instance.SpawnObject(popupPrefab, 
                 position, Quaternion.identity);
             clone.SetValue(damage);
-            clone.TMP.color = DamagePopupColor;
+            clone.TMP.color = Color.white;
         }
 
         public void CreateHealPopup(float heal, Vector3 position)
         {
+            if(heal < 1f && heal > - 1) return;
+            
             var clone = PoolManager.Instance.SpawnObject(popupPrefab, 
                 position, Quaternion.identity);
             clone.SetValue(heal);
-            clone.TMP.color = HealPopupColor;
+            clone.TMP.color = heal > 0 ? Color.green: Color.red;
         }
         
         public void Dispose()

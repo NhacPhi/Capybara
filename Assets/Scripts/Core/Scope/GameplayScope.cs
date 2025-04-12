@@ -29,7 +29,7 @@ namespace Core.Scope
                 
             //Entry Point
             builder.RegisterEntryPoint<GameplayPreLoad>(Lifetime.Scoped).As<IPreload>();
-            builder.RegisterEntryPoint<TextCombat>(Lifetime.Scoped).AsSelf();
+            builder.RegisterEntryPoint<CombatText>(Lifetime.Scoped).As<IDamagePopup, IHealPopup>();
             builder.RegisterEntryPoint<Gameloop>(Lifetime.Scoped).AsSelf();
             builder.RegisterEntryPoint<EnemyManager>(Lifetime.Scoped).AsSelf();
             

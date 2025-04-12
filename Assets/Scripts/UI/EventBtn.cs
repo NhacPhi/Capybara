@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using Core.Scope;
+using Event_System;
 using Observer;
 using UI.UI_Manager;
 using UnityEngine;
@@ -48,19 +50,32 @@ namespace UI
                 SelectionGroup = GetComponentInChildren<SelectionEventGroup>();
             }
 
-            GameAction.OnSelectionEvent += HandleSelectionEvent;
+  //          GameAction.OnSelectionEvent += HandleSelectionEvent;
             GameAction.OnStartCombat += HandleStartCombat;
             GameAction.OnCombatEnd += HandleCombatEnd;
             GameAction.OnSelectionEventDone += HandleSelectionEventDone;
+            GameAction.OnEvent += HandleEvent;
+            GameAction.OnGachaAnimationDone += HandleGachaDone;
         }
-
 
         private void OnDestroy()
         {
-            GameAction.OnSelectionEvent -= HandleSelectionEvent;
+//            GameAction.OnSelectionEvent -= HandleSelectionEvent;
             GameAction.OnStartCombat -= HandleStartCombat;
             GameAction.OnCombatEnd -= HandleCombatEnd;
             GameAction.OnSelectionEventDone -= HandleSelectionEventDone;
+            GameAction.OnEvent -= HandleEvent;
+            GameAction.OnGachaAnimationDone -= HandleGachaDone;
+        }
+        
+        private void HandleGachaDone()
+        {
+            NextDayBtn.gameObject.SetActive(true);
+        }
+        
+        private void HandleEvent(EventBase evt, Action callback)
+        {
+            NextDayBtn.gameObject.SetActive(false);
         }
         
         private void HandleCombatEnd()
@@ -71,18 +86,12 @@ namespace UI
 
         private void HandleStartCombat()
         {
-            NextDayBtn.gameObject.SetActive(false);
             IncombatImage.gameObject.SetActive(true);
         }
         
         private void HandleSelectionEventDone()
         {
             SelectionGroup.gameObject.SetActive(false);
-        }
-
-        private void HandleSelectionEvent()
-        {
-            NextDayBtn.gameObject.SetActive(false);
         }
     }
 }         

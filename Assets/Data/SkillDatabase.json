@@ -33,5 +33,33 @@
     "Name" : "Resilient Heart",
     "Description" : "Nếu mất hơn {0}% HP trong một lượt, hồi lại {1}% HP ngay sau đó.",
     "Values" : [30, 15]
+  },
+  {
+    "$type": "Core.Skill.BattleRecoveryData, Assembly-CSharp",
+    "ID" : "skill_06",
+    "Name" : "Battle Recovery",
+    "Description" : "Sau mỗi trận đấu, hồi lại {0}% HP.",
+    "Values" : [20]
+  },
+  {
+    "$type": "Core.Skill.VitalityBoostData, Assembly-CSharp",
+    "ID" : "skill_07",
+    "Name" : "Vitality Boost",
+    "Description" : "Tăng tối đa HP lên {0}% khi bắt đầu trận đấu.",
+    "Values" : [20]
+  },
+  {
+    "$type": "Core.Skill.HealingAuraData, Assembly-CSharp",
+    "ID" : "skill_08",
+    "Name" : "Healing Aura",
+    "Description" : "Mỗi {0} lượt, hồi {1}% HP.",
+    "Values" : [3, 8]
+  },
+  {
+    "$type": "Core.Skill.FatalFinisherData, Assembly-CSharp",
+    "ID" : "skill_09",
+    "Name" : "Fatal Finisher",
+    "Description" : "Khi hạ gục kẻ địch, hồi lại {0}% HP.",
+    "Values" : [5]
   }
 ]

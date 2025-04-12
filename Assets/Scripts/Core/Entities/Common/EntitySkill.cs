@@ -4,14 +4,16 @@ using Core.Skill;
 using Observer;
 using Tech.Composite;
 using UnityEngine;
+using VContainer;
 
 namespace Core.Entities.Common
 {
     public class EntitySkill : CoreComponent
     {
-        private Dictionary<string, SkillBase> _skillDict = new ();
+        private Dictionary<string, SkillRuntime> _skillDict = new ();
         private EntityStats _entityStats; 
-            
+        [Inject] private IObjectResolver _objectResolver;    
+        
         protected override void Awake()
         {
             base.Awake();
@@ -48,7 +50,9 @@ namespace Core.Entities.Common
 
         public void AddSkill(SkillData skill)
         {
-            _skillDict.Add(skill.ID, skill.CreateRuntimeSkill(_entityStats));            
+            var skillRuntime = skill.CreateRuntimeSkill(_entityStats);
+            _objectResolver.Inject(skillRuntime);
+            _skillDict.Add(skill.ID, skillRuntime);            
         }
         
         public bool HasSkill(string skillID)

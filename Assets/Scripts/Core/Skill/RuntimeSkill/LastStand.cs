@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Core.Skill
 {
-    public class LastStand : SkillBase, IDefenseSkill, IResetSkill, IDisposable
+    public class LastStand : SkillRuntime, IDefenseSkill, IResetSkill, IDisposable
     {
         private LastStandData data;
         private bool _isActive;
@@ -24,7 +24,7 @@ namespace Core.Skill
             GameAction.OnRoundChange -= HandleRoundChange;
         }
         
-        private void HandleRoundChange(int curRound, int maxRound)
+        private void HandleRoundChange(int curRound)
         {
             _roundRemaining--;
             
@@ -61,5 +61,10 @@ namespace Core.Skill
             _defStat = null;
         }
 
+    }
+    
+    public class LastStandData : SkillData
+    {
+        public override SkillRuntime CreateRuntimeSkill(EntityStats owner) => new LastStand(owner, this);
     }
 }

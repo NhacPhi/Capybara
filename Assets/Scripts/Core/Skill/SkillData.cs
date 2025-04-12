@@ -39,6 +39,6 @@ namespace Core.Skill
 
         [JsonProperty("Values")] 
         public ReadOnlyCollection<float> Values { get; protected set; }
-        public abstract SkillBase CreateRuntimeSkill(EntityStats owner);
+        public abstract SkillRuntime CreateRuntimeSkill(EntityStats owner);
     }
 }

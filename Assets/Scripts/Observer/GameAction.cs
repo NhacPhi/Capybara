@@ -9,17 +9,19 @@ namespace Observer
     {
         public static Action OnNextDay;
         public static Action OnSelectionEvent;
-        public static Action<Event_System.EventBase> OnEvent;
+        public static Action<Event_System.EventBase, Action> OnEvent;
         public static Action OnSelectionEventDone;
         public static Action OnPlayerSelect;
         public static Action OnStartCombat;
         public static Action OnCombatEnd;
-        public static Action<int, int> OnRoundChange;
+        public static Action<int> OnRoundChange;
+        public static Action<int, int> OnRoundStart;
         public static Action<EnemyCtrl> OnEnemyDead;
         public static Action OnPlayerTurnStart;
         public static Action OnEndPlayerTurn;
         public static Action OnEnemyTurnStart;
         public static Action OnEndEnemyTurn;
+        public static Action OnGachaAnimationDone;
         
 #if UNITY_EDITOR
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

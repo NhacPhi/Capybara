@@ -1,6 +1,6 @@
 namespace Core.Skill
 {
-    public class Charge : SkillBase, IAttackSkill, IResetSkill
+    public class Charge : SkillRuntime, IAttackSkill, IResetSkill
     {
         private ChargeSkillData _skillData;
 
@@ -27,5 +27,10 @@ namespace Core.Skill
         {
             IsFirstAttack = true;
         }
+    }
+    
+    public class ChargeSkillData : SkillData
+    {
+        public override SkillRuntime CreateRuntimeSkill(EntityStats owner) => new Charge(owner, this);
     }
 }

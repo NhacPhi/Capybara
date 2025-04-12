@@ -1,9 +1,9 @@
 namespace Core.Skill
 {
-    public abstract class SkillBase
+    public abstract class SkillRuntime
     {
         protected EntityStats owner;
-        public SkillBase(EntityStats owner)
+        public SkillRuntime(EntityStats owner)
         {
             this.owner = owner;
         }

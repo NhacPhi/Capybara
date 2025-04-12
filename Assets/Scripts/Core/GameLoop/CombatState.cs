@@ -1,6 +1,7 @@
 using Observer;
 using Tech.State_Machine;
 using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Core.GameLoop
 {
@@ -54,7 +55,7 @@ namespace Core.GameLoop
             base.Enter();
             CurRound = 1;
             _nextTurn = Turn.PlayerTurn;
-            GameAction.OnRoundChange?.Invoke(CurRound, maxRound);
+            GameAction.OnRoundStart?.Invoke(CurRound, maxRound);
         }
 
         public override void Exit()
@@ -65,7 +66,7 @@ namespace Core.GameLoop
         public override void OnUpdate()
         {
             if(_currentTurn == _nextTurn) return;
-
+            
             switch (_nextTurn)
             {
                 case Turn.None:
@@ -77,7 +78,7 @@ namespace Core.GameLoop
                     if (_currentTurn == Turn.EnemyTurn)
                     {
                         CurRound++;
-                        GameAction.OnRoundChange?.Invoke(CurRound, maxRound);
+                        GameAction.OnRoundChange?.Invoke(CurRound);
                     }
                     GameAction.OnPlayerTurnStart?.Invoke();
                     break;

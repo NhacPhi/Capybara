@@ -446,6 +446,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6205822044191564469, guid: 7958d481371aa5d488620a84eabff3db, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 244.46799
+      objectReference: {fileID: 0}
     - target: {fileID: 9013598166650781251, guid: 7958d481371aa5d488620a84eabff3db, type: 3}
       propertyPath: m_Name
       value: Scroll

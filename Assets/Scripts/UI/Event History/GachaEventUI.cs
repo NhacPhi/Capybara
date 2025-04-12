@@ -30,7 +30,7 @@ public class GachaEventUI : MonoBehaviour
         ScrollCtrl.Scroller.JumpTo(2, JumpToMethod.Center);
     }
 
-    private void HandleOnEvent(EventBase evt)
+    private void HandleOnEvent(EventBase evt, Action callback)
     {
         ScrollCtrl.M_ScrollRect.DOVerticalNormalizedPos(ScrollCtrl.Scroller.IndexToNormalizedPos(
             Random.Range(0, 100)), 1.5f).SetEase(Ease.OutQuint).OnComplete(() =>
@@ -40,6 +40,8 @@ public class GachaEventUI : MonoBehaviour
             {
                 _textResult.text = evt.Description;
             }
+            GameAction.OnGachaAnimationDone?.Invoke();
+            callback?.Invoke();
         });
     }
 }

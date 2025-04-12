@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Core.Skill
 {
-    public class Fury : SkillBase, IAttackSkill
+    public class Fury : SkillRuntime, IAttackSkill
     {
         protected FurySkillData _skillData;
 
@@ -25,5 +25,10 @@ namespace Core.Skill
 
             damageInput *= (1 + dmgPercentAdd);
         }
+    }
+    
+    public class FurySkillData : SkillData
+    {
+        public override SkillRuntime CreateRuntimeSkill(EntityStats owner) => new Fury(owner, this);
     }
 }

@@ -4,7 +4,6 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tech.Json;
 using UnityEngine;
-using VContainer;
 
 namespace Core.Skill
 {
@@ -30,6 +29,11 @@ namespace Core.Skill
         public SkillData GetSkill(int index)
         {
             return _data.ElementAt(index).Value;
+        }
+
+        public SkillData GetSkill(string id)
+        {
+            return _data.GetValueOrDefault(id);
         }
     }
 }

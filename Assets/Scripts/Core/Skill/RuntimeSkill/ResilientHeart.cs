@@ -1,12 +1,14 @@
 using Cysharp.Threading.Tasks;
 using Stats.M_Attribute;
 using UnityEngine;
+using VContainer;
 
 namespace Core.Skill
 {
-    public class ResilientHeart : SkillBase, IDefenseSkill
+    public class ResilientHeart : SkillRuntime, IDefenseSkill
     {
         protected ResilientHeartData data;
+        [Inject] private IHealPopup _healPopup;
         
         public ResilientHeart(EntityStats owner, ResilientHeartData data) : base(owner)
         {
@@ -35,7 +37,12 @@ namespace Core.Skill
             float hpPercentHeal = data.Values[1] / 100;
             float healValue = hp.MaxValue * hpPercentHeal;
             hp.Value += healValue;
-            this.owner.TextCombat.CreateHealPopup(healValue, this.owner.transform.position);
+            _healPopup.CreateHealPopup(healValue, this.owner.transform.position);
         }
+    }
+    
+    public class ResilientHeartData : SkillData
+    {
+        public override SkillRuntime CreateRuntimeSkill(EntityStats owner) => new ResilientHeart(owner, this);
     }
 }

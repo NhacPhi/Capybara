@@ -1,14 +1,16 @@
 using System;
 using Observer;
 using Stats.M_Attribute;
+using VContainer;
 
 namespace Core.Skill
 {
-    public class Regeneration : SkillBase, IDisposable
+    public class Regeneration : SkillRuntime, IDisposable
     {
         protected RegenerationData data;
         protected int activeRemaining;
-
+        [Inject] private IHealPopup _healPopup;
+        
         public Regeneration(EntityStats owner, RegenerationData data) : base(owner)
         {
             this.data = data;
@@ -29,12 +31,15 @@ namespace Core.Skill
             float hpLost = hp.MaxValue - hp.Value;
             float hpHeal = hpLost * hpPercentHeal;
             hp.Value += hpHeal;
-            this.owner.TextCombat.CreateHealPopup(hpHeal, this.owner.transform.position);
+            _healPopup.CreateHealPopup(hpHeal, this.owner.transform.position);
             activeRemaining--;
         }
         
         public override SkillData GetSkillData() => this.data;
-        
-        
+    }
+    
+    public class RegenerationData : SkillData
+    {
+        public override SkillRuntime CreateRuntimeSkill(EntityStats owner) => new Regeneration(owner, this);
     }
 }

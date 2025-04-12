@@ -57,7 +57,14 @@ namespace UI
         public void PopulateRandomSkill(EntitySkill entities)
         {
             var skillIds = new HashSet<int>();
-            for (var i = 0; i < SkillItems.Length; i++)
+            var skill1 = _database.GetSkill("skill_09");
+            SkillItems[0].gameObject.SetActive(true);
+            SkillItems[0].SkillName.text = skill1.Name;
+            SkillItems[0].Description.text = skill1.Description;
+            SkillItems[0].SkillData = skill1;
+            SkillItems[0].entities = entities;
+            
+            for (var i = 1; i < SkillItems.Length; i++)
             {
                 SkillItemUI skillItem = SkillItems[i];
                 int index = Random.Range(0, _database.Count);

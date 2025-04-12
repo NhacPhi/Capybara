@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Stats.stat
 {
@@ -9,7 +10,7 @@ namespace Stats.stat
 		Percent,
 	}
 
-	public struct Modifier : IEquatable<Modifier>
+	public struct Modifier : IEquatable<Modifier>, IEqualityComparer<Modifier>
 	{
 		public float Value;
 		public ModifyType Type;
@@ -23,5 +24,15 @@ namespace Stats.stat
         {
             return Value.Equals(other.Value) && Type == other.Type;
         }
-    }
+
+        public bool Equals(Modifier x, Modifier y)
+        {
+	        return x.Value.Equals(y.Value) && x.Type == y.Type;
+        }
+
+        public int GetHashCode(Modifier obj)
+        {
+	        return HashCode.Combine(obj.Value, (int)obj.Type);
+        }
+	}
 }

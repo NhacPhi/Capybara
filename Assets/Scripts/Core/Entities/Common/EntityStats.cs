@@ -14,7 +14,7 @@ namespace Core
         public Action<DamageInfo> OnHit;
         public bool IsDead { get; protected set; }
         public EntitySkill Skill { get; protected set; }
-        [Inject] public TextCombat TextCombat { get; private set; }
+        [Inject] public IDamagePopup DamagePopup { get; private set; }
 
         protected virtual void Start()
         {
@@ -33,7 +33,7 @@ namespace Core
                 Skill.ApplyDefenseSkill(ref damageOutput, damageInfo.Source, this);
             }
             
-            TextCombat.CreateDamagePopup(damageOutput, this.transform.position);
+            DamagePopup.CreateDamagePopup(damageOutput, this.transform.position);
             hp.Value -= damageOutput;
             if (!(hp.Value <= 0)) return;
             OnDeath();
