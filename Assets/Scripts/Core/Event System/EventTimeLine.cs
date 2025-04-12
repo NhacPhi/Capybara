@@ -14,10 +14,14 @@ namespace Event_System
         public int CurrentDay { get; private set; }
         public int DayCount => _timeLine.Count;
         
-        public async UniTask Init(DataService dataService, CancellationToken token = default)
+        public async UniTask Init(CancellationToken token = default)
         {
-            _timeLine = await dataService.LoadDataAsync<List<DayContent>>(
-                AddressConstant.EventTimeline, token);
+            var textAsset = await AddressablesManager.Instance.LoadAssetAsync<TextAsset>(
+                AddressConstant.EventTimeline, token: token);
+            
+            _timeLine = Json.DeserializeObject<List<DayContent>>(textAsset.text);
+         
+            AddressablesManager.Instance.RemoveAsset(AddressConstant.EventTimeline);
         }
 
         public void OnAfterLoadDone()
@@ -40,7 +44,7 @@ namespace Event_System
 
     public enum TimeLineType
     {
-        SelectionRandom,
+        SpecialRandom,
         FightRandom,
         PassiveRandom,
         Boss,

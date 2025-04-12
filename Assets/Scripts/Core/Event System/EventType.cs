@@ -4,7 +4,7 @@ namespace Event_System
     {
         Start,
         Fight,
-        Selection,
+        Special,
         Passive,
         Boss
     }

@@ -10,14 +10,15 @@ namespace Core.Skill
 {
     public class SkillDatabase
     {
-        [Inject] private DataService _dataService;
         private static Dictionary<string, SkillData> _data;
 
         public async UniTask Init(CancellationToken cancellationToken = default)
         {
-            var listSKill = await _dataService.LoadDataAsync
-                <List<SkillData>>(AddressConstant.SkillDatabase, cancellationToken);
-
+            var textAsset = await AddressablesManager.Instance.LoadAssetAsync<TextAsset>(
+                AddressConstant.SkillDatabase, token: cancellationToken);
+            
+            var listSKill = Json.DeserializeObject<List<SkillData>>(textAsset.text);
+            
             _data = listSKill.ToDictionary(x => x.ID, x => x);
         }
         public int Count => _data.Count;

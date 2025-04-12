@@ -9,6 +9,7 @@ namespace Observer
     {
         public static Action OnNextDay;
         public static Action OnSelectionEvent;
+        public static Action<Event_System.EventBase> OnEvent;
         public static Action OnSelectionEventDone;
         public static Action OnPlayerSelect;
         public static Action OnStartCombat;

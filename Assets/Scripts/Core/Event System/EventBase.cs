@@ -13,7 +13,7 @@ namespace Event_System
         [JsonProperty("Description")]
         public virtual string Description { get; protected set; } = string.Empty;
 
-        public abstract void HandleEvent(EventManager manager);
+        public abstract void HandleEvent();
     }
 }
 

@@ -1,39 +1,47 @@
 using System.Linq;
+using Core.Scope;
 using Observer;
 using UI.UI_Manager;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace UI
 {
     public class EventBtn : MonoBehaviour
     {
-        [SerializeField] private Button _nextDayBtn;
-        [SerializeField] private Image _incombatImage;
+        [field: SerializeField] public Button NextDayBtn { get; private set; }
+        [field: SerializeField] public Image IncombatImage { get; private set; }
         [field: SerializeField] public SelectionEventGroup SelectionGroup {get; private set;}
-
+        [Inject] private IPreload _preLoadProgress;
+        
         private void Reset()
         {
             var allTransform = GetComponentsInChildren<Transform>(true);
             
-            if (!_nextDayBtn)
+            if (!NextDayBtn)
             {
-                _nextDayBtn = allTransform.FirstOrDefault(x => x.name.ToLower().Contains("next day"))
+                NextDayBtn = allTransform.FirstOrDefault(x => x.name.ToLower().Contains("next day"))
                     .GetComponentInChildren<Button>();
             }
 
-            if (!_incombatImage)
+            if (!IncombatImage)
             {
-                _incombatImage = allTransform.FirstOrDefault(x => x.name.ToLower().Contains("combat"))
+                IncombatImage = allTransform.FirstOrDefault(x => x.name.ToLower().Contains("combat"))
                     .GetComponentInChildren<Image>();
             }
             
             SelectionGroup = GetComponentInChildren<SelectionEventGroup>(true);
+
+            _preLoadProgress.OnLoadDone += () =>
+            {
+                NextDayBtn.gameObject.SetActive(true);
+            };
         }
 
         private void Awake()
         {
-            _nextDayBtn.gameObject.SetActive(true);
+            NextDayBtn.gameObject.SetActive(true);
 
             if (!SelectionGroup)
             {
@@ -41,7 +49,6 @@ namespace UI
             }
 
             GameAction.OnSelectionEvent += HandleSelectionEvent;
-            GameAction.OnPlayerSelect += HandlePlayerSelect;
             GameAction.OnStartCombat += HandleStartCombat;
             GameAction.OnCombatEnd += HandleCombatEnd;
             GameAction.OnSelectionEventDone += HandleSelectionEventDone;
@@ -51,39 +58,31 @@ namespace UI
         private void OnDestroy()
         {
             GameAction.OnSelectionEvent -= HandleSelectionEvent;
-            GameAction.OnPlayerSelect -= HandlePlayerSelect;
             GameAction.OnStartCombat -= HandleStartCombat;
             GameAction.OnCombatEnd -= HandleCombatEnd;
             GameAction.OnSelectionEventDone -= HandleSelectionEventDone;
         }
+        
         private void HandleCombatEnd()
         {
-            _nextDayBtn.gameObject.SetActive(true);
-            _incombatImage.gameObject.SetActive(false);
+            NextDayBtn.gameObject.SetActive(true);
+            IncombatImage.gameObject.SetActive(false);
         }
 
         private void HandleStartCombat()
         {
-            _nextDayBtn.gameObject.SetActive(false);
-            _incombatImage.gameObject.SetActive(true);
+            NextDayBtn.gameObject.SetActive(false);
+            IncombatImage.gameObject.SetActive(true);
         }
         
         private void HandleSelectionEventDone()
-        {
-            _nextDayBtn.gameObject.SetActive(true);
-            SelectionGroup.gameObject.SetActive(false);
-        }
-
-
-        private void HandlePlayerSelect()
         {
             SelectionGroup.gameObject.SetActive(false);
         }
 
         private void HandleSelectionEvent()
         {
-            _nextDayBtn.gameObject.SetActive(false);
-            SelectionGroup.gameObject.SetActive(true);
+            NextDayBtn.gameObject.SetActive(false);
         }
     }
 }         

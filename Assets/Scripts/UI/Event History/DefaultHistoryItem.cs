@@ -6,7 +6,7 @@ using Tech.Pooling;
 using TMPro;
 using UnityEngine;
 
-public class EventHistoryItem : MonoBehaviour
+public class DefaultHistoryItem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _dayText;
     [SerializeField] private TextMeshProUGUI _descriptionText;
@@ -48,7 +48,7 @@ public class EventHistoryItem : MonoBehaviour
         _valueChangeListText.text = string.Empty;
     }
 
-    public EventHistoryItem SetDay(int day)
+    public DefaultHistoryItem SetDay(int day)
     {
         var stringBuilder = GenericPool<StringBuilder>.Get().Clear();
         stringBuilder.Append(Day);
@@ -59,13 +59,13 @@ public class EventHistoryItem : MonoBehaviour
         return this;
     }
 
-    public EventHistoryItem SetDescription(string description)
+    public DefaultHistoryItem SetDescription(string description)
     {
         _descriptionText.text = description;
         return this;
     }
 
-    public EventHistoryItem SetValueChange(BaseModifyValue[] modifyValues)
+    public DefaultHistoryItem SetValueChange(BaseModifyValue[] modifyValues)
     {
         if(modifyValues == null || modifyValues.Length == 0) return this;
         

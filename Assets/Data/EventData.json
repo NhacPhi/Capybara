@@ -1,10 +1,64 @@
 {
-  "Start" : [
+  "Start": [
     {
       "$type": "Event_System.StartEvent, Assembly-CSharp",
-      "ID": 101231,
+      "ID": "start_1",
       "Name": "None",
-      "Description": "Loài Người và Ma Thú đã tán công quê hương của bạn, bạn là người duy nhất sống sót, nhanh cầm vũ khí lên và chiến đấu"
+      "Description": "Humans and Beasts have attacked your homeland. You are the sole survivor. Quickly grab your weapon and fight!"
+    },
+    {
+      "$type": "Event_System.StartEvent, Assembly-CSharp",
+      "ID": "start_2",
+      "Name": "The Forest Whispers",
+      "Description": "As you wander through the dense forest, you hear whispers in the wind. The trees seem alive, warning you of danger ahead."
+    },
+    {
+      "$type": "Event_System.StartEvent, Assembly-CSharp",
+      "ID": "start_3",
+      "Name": "The Abandoned Village",
+      "Description": "You stumble upon a village that looks like it was abandoned overnight. Strange symbols are carved into every door. What could have happened here?"
+    },
+    {
+      "$type": "Event_System.StartEvent, Assembly-CSharp",
+      "ID": "start_4",
+      "Name": "The Mysterious Stranger",
+      "Description": "A hooded figure appears on the road ahead. They claim to know the way to safety but demand something in return. Do you trust them?"
+    },
+    {
+      "$type": "Event_System.StartEvent, Assembly-CSharp",
+      "ID": "start_5",
+      "Name": "The Broken Bridge",
+      "Description": "The only way forward is across a rickety old bridge. It creaks under your weight as you step onto it. Will it hold, or will you need to find another path?"
+    },
+    {
+      "$type": "Event_System.StartEvent, Assembly-CSharp",
+      "ID": "start_6",
+      "Name": "The Starving Wolf",
+      "Description": "A lone wolf blocks your path. Its ribs show through its fur, and it growls weakly. Do you fight, flee, or offer it food?"
+    },
+    {
+      "$type": "Event_System.StartEvent, Assembly-CSharp",
+      "ID": "start_7",
+      "Name": "The Hidden Cave",
+      "Description": "While exploring the mountainside, you discover a hidden cave. Inside, you find remnants of an ancient civilization. What secrets lie within?"
+    },
+    {
+      "$type": "Event_System.StartEvent, Assembly-CSharp",
+      "ID": "start_8",
+      "Name": "The Storm Approaches",
+      "Description": "Dark clouds gather overhead, and thunder rumbles in the distance. You must find shelter quickly before the storm hits. Where will you go?"
+    },
+    {
+      "$type": "Event_System.StartEvent, Assembly-CSharp",
+      "ID": "start_9",
+      "Name": "The Forgotten Shrine",
+      "Description": "You come across a shrine covered in moss and vines. A faint glow emanates from within. Do you investigate further, risking the unknown?"
+    },
+    {
+      "$type": "Event_System.StartEvent, Assembly-CSharp",
+      "ID": "start_10",
+      "Name": "The River Crossing",
+      "Description": "A wide river blocks your path. The current is strong, but you spot a fallen tree that might serve as a makeshift bridge. Do you risk crossing?"
     }
   ],
   "Passive" : [
@@ -260,27 +314,10 @@
       ]
     }
   ],
-  "Selection" : [
+  "Special" : [
     {
-      "$type": "Event_System.SelectionEvent, Assembly-CSharp",
-      "ID": "select_01",
-      "Description": "Tiên Linh Nhỏ: Bạn càn hiến tế để nhận skill",
-      "Option 1" : {
-        "Name" : "Hiến Tế HP",
-        "Modifier": {
-          "$type": "Event_System.AttributeModify, Assembly-CSharp",
-          "Value" : -20,
-          "AttributeType" : "Hp"
-        }
-      },
-      "Option 2" : {
-        "Name" : "Hiến Tế ATK",
-        "Modifier": {
-          "$type": "Event_System.StatModify, Assembly-CSharp",
-          "Value" : -10,
-          "StatType" : "Atk"
-        }
-      }
+      "$type": "Event_System.RandomSkillReward, Assembly-CSharp",
+      "ID": "select_01"
     }
   ],
   "Fight" : [

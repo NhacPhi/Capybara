@@ -1,0 +1,1 @@
+When Build IL2CPP Need link.xml because IL2CPP stripping code from newtonsoft json 

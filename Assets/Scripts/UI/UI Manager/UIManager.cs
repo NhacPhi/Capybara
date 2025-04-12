@@ -65,15 +65,15 @@ public class UIManager : MonoBehaviour
         return default;
     }
     
-    public void ShowPanel(string panelName)
+    public T ShowPanel<T>(string panelName) where T : PanelBase
     {
         if (!_panelDictionary.TryGetValue(panelName, out var panel))
         {
-            _ = CreatePanelAsync(panelName, onComplete:x => x.Show());
-            return;
+            return null;
         }
 
         panel.Show();
+        return panel as T;
     }
 
     public void HidePanel(string panelName)

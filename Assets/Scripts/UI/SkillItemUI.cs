@@ -10,8 +10,8 @@ namespace UI
     {
         [field: SerializeField] public TextMeshProUGUI SkillName { get; private set; }
         [field: SerializeField] public TextMeshProUGUI Description { get; private set; }
-        public SkillData SkillData;
-        public EntitySkill entities;
+        [HideInInspector] public SkillData SkillData;
+        [HideInInspector] public EntitySkill entities;
         private void Reset()
         {
             SkillName = transform.Find("Skill Name").GetComponent<TextMeshProUGUI>();

@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Observer;
 using UnityEngine;
 using VContainer;
+using Random = UnityEngine.Random;
 
 namespace UI
 {
@@ -24,35 +25,43 @@ namespace UI
 
         private async UniTask WaitLoading()
         {
-            GameplayPanel panel;
+            GameplayPanel gameplayPanel;
             do
             {
                 //Wait _uiManager Inject And Panel Created
                 await UniTask.Yield();
-                panel =  _uiManager.GetPanel<GameplayPanel>(AddressConstant.GameplayPanel);
+                gameplayPanel =  _uiManager.GetPanel<GameplayPanel>(AddressConstant.GameplayPanel);
             } 
-            while (!panel);
+            while (!gameplayPanel);
             
-            _eventHistory = panel.EventHistory;
+            _eventHistory = gameplayPanel.EventHistory;
             foreach (var skillItem in SkillItems)
             {
                 skillItem.Btn.onClick.AddListener(() =>
                 {
                     skillItem.entities.AddSkill(skillItem.SkillData);
                     this.Hide();
-                _eventHistory.CreateMessage().SetDescription(rewardMessage + skillItem.SkillData.Name);
-                GameAction.OnSelectionEventDone?.Invoke();
+                    
+                    gameplayPanel.EventButton.NextDayBtn.gameObject.SetActive(true);
+                    var message = gameplayPanel.EventHistory.CreateMessage(MessageType.Default);
+                    if (message.TryGetComponent(out DefaultHistoryItem item))
+                    {
+                        item.SetDescription(rewardMessage + skillItem.SkillData.Name);
+                    }
+                    
+                    GameAction.OnSelectionEventDone?.Invoke();
                 });
             }
         }
         
-        public void Populate(EntitySkill entities)
+        public void PopulateRandomSkill(EntitySkill entities)
         {
             var skillIds = new HashSet<int>();
-            foreach (var skillItem in SkillItems)
+            for (var i = 0; i < SkillItems.Length; i++)
             {
+                SkillItemUI skillItem = SkillItems[i];
                 int index = Random.Range(0, _database.Count);
-                
+
                 while (skillIds.Contains(index))
                 {
                     index = Random.Range(0, _database.Count);
@@ -61,13 +70,27 @@ namespace UI
                 skillIds.Add(index);
 
                 var skill = _database.GetSkill(index);
-                
+
                 if (entities.HasSkill(skill.ID))
                 {
                     skillItem.gameObject.SetActive(false);
                     continue;
                 }
-                
+
+                skillItem.gameObject.SetActive(true);
+                skillItem.SkillName.text = skill.Name;
+                skillItem.Description.text = skill.Description;
+                skillItem.SkillData = skill;
+                skillItem.entities = entities;
+            }
+        }
+
+        public void Populate(EntitySkill entities, SkillData[] skills)
+        {
+            for (var i = 0; i < SkillItems.Length; i++)
+            {
+                var skill = skills[i];
+                SkillItemUI skillItem = SkillItems[i];
                 skillItem.gameObject.SetActive(true);
                 skillItem.SkillName.text = skill.Name;
                 skillItem.Description.text = skill.Description;

@@ -2,28 +2,33 @@ using Core.Entities.Player;
 using Newtonsoft.Json;
 using Stats.M_Attribute;
 using Stats.stat;
+using VContainer;
 
 namespace Event_System
 {
     public class PassiveEvent : EventBase
     {
         public override EventType Type => EventType.Passive;
-
+        [Inject] protected EventManager eventManager;
+        
         [JsonProperty("Modifier")]
         public BaseModifyValue[] ModifyValues { get; private set; } = null;
         
-        public override void HandleEvent(EventManager manager)
+        public override void HandleEvent()
         {
-            EventHistory eventHistory = manager.EventHistory;
-            EventTimeLine eventTimeLine = manager.EventTimeLine;
-            eventHistory.CreateMessage()
-                .SetDay(eventTimeLine.CurrentDay)
-                .SetDescription(this.Description)
-                .SetValueChange(this.ModifyValues);
+            EventHistory eventHistory = eventManager.EventHistory;
+            EventTimeLine eventTimeLine = eventManager.EventTimeLine;
+            
+            if (eventHistory.CreateMessage().TryGetComponent(out DefaultHistoryItem defaultHistoryItem))
+            {
+                defaultHistoryItem.SetDay(eventTimeLine.CurrentDay)
+                    .SetDescription(this.Description)
+                    .SetValueChange(this.ModifyValues);
+            }
             
             if(ModifyValues == null) return;
             
-            if(!manager.Player.TryGetComponent(out PlayerStats playerStats)) return;
+            if(!eventManager.Player.TryGetComponent(out PlayerStats playerStats)) return;
             
             foreach (BaseModifyValue modifier in ModifyValues)
             {

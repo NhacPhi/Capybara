@@ -172,6 +172,17 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   PlayerPrefab: {fileID: 5566481235363752457, guid: c6731a2b2b43e8949b6f9e4631f6d7cf, type: 3}
+--- !u!114 &377294328 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2707226359138722735, guid: 7958d481371aa5d488620a84eabff3db, type: 3}
+  m_PrefabInstance: {fileID: 1059183631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +332,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gameplay
       objectReference: {fileID: 0}
+    - target: {fileID: 2707226359138722735, guid: 7958d481371aa5d488620a84eabff3db, type: 3}
+      propertyPath: m_text
+      value: '
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 3075620990831382726, guid: 7958d481371aa5d488620a84eabff3db, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -401,6 +418,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4001921516734406711, guid: 7958d481371aa5d488620a84eabff3db, type: 3}
+      propertyPath: prefabCount
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4465693844794638298, guid: 7958d481371aa5d488620a84eabff3db, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -409,6 +430,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4743816358815628076, guid: 7958d481371aa5d488620a84eabff3db, type: 3}
+      propertyPath: _textResult
+      value: 
+      objectReference: {fileID: 377294328}
     - target: {fileID: 5398047974431181593, guid: 7958d481371aa5d488620a84eabff3db, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -420,6 +445,14 @@ PrefabInstance:
     - target: {fileID: 5398047974431181593, guid: 7958d481371aa5d488620a84eabff3db, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9013598166650781251, guid: 7958d481371aa5d488620a84eabff3db, type: 3}
+      propertyPath: m_Name
+      value: Scroll
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163685652405104130, guid: 7958d481371aa5d488620a84eabff3db, type: 3}
+      propertyPath: m_Name
+      value: Text Result
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -507,6 +540,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1759908669}
     m_Modifications:
+    - target: {fileID: 1492665663556134710, guid: 76c5739bb3757514f929d1afbcc106a2, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6055560201402852611, guid: 42c7095d3f7b20e45a07c19d638b08d1, type: 2}
     - target: {fileID: 1841463766132559564, guid: 76c5739bb3757514f929d1afbcc106a2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -607,6 +644,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -912.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3976454238857655371, guid: 76c5739bb3757514f929d1afbcc106a2, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6055560201402852611, guid: 42c7095d3f7b20e45a07c19d638b08d1, type: 2}
     - target: {fileID: 4415015100338556243, guid: 76c5739bb3757514f929d1afbcc106a2, type: 3}
       propertyPath: m_Alpha
       value: 0
@@ -631,6 +672,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -599
       objectReference: {fileID: 0}
+    - target: {fileID: 6500897919180914477, guid: 76c5739bb3757514f929d1afbcc106a2, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6055560201402852611, guid: 42c7095d3f7b20e45a07c19d638b08d1, type: 2}
     - target: {fileID: 8423540063894723081, guid: 76c5739bb3757514f929d1afbcc106a2, type: 3}
       propertyPath: m_Pivot.y
       value: 1
@@ -655,6 +700,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Choose Skill
       objectReference: {fileID: 0}
+    - target: {fileID: 8958551634044058706, guid: 76c5739bb3757514f929d1afbcc106a2, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6055560201402852611, guid: 42c7095d3f7b20e45a07c19d638b08d1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
