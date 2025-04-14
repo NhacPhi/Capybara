@@ -60,7 +60,7 @@ namespace Core.Entities.Common
             return _skillDict.Count != 0 && _skillDict.ContainsKey(skillID);
         }
 
-        public void ApplyAttackSkill(ref float damage, EntityStats source)
+        public void ApplyAttackSkill(ref float damage)
         {
             foreach (var skill in _skillDict.Values)
             {
@@ -71,7 +71,7 @@ namespace Core.Entities.Common
             }
         }
 
-        public void ApplyDefenseSkill(ref float damage, Transform attacker, EntityStats source)
+        public void ApplyDefenseSkill(ref float damage, Transform attacker)
         {
             foreach (var skill in _skillDict.Values)
             {

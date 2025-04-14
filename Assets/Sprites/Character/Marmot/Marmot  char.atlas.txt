@@ -1,0 +1,40 @@
+Marmot  char.png
+size:570,1026
+filter:Linear,Linear
+pma:true
+B Leg
+bounds:302,393,80,41
+offsets:0,0,80,42
+rotate:90
+Body
+bounds:302,147,266,244
+F Leg
+bounds:345,411,80,40
+offsets:0,1,80,41
+FHand
+bounds:379,6,90,139
+offsets:0,1,90,140
+Hand
+bounds:254,20,125,123
+offsets:2,1,128,125
+rotate:90
+Head
+bounds:2,13,250,169
+offsets:1,1,252,171
+Neck
+bounds:372,453,260,171
+offsets:0,0,261,171
+rotate:90
+Scream Head
+bounds:2,184,298,289
+offsets:1,1,300,291
+Slash FX
+bounds:2,715,309,550
+offsets:1,0,311,550
+rotate:90
+Sword copy
+bounds:2,475,368,238
+offsets:2,1,372,240
+Tail
+bounds:471,2,143,83
+rotate:90

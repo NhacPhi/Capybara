@@ -8,7 +8,6 @@ namespace Core.Skill
     public class BattleRecovery : SkillRuntime, IDisposable
     {
         private BattleRecoveryData data;
-        [Inject] private IHealPopup _healPopup;
         
         public BattleRecovery(EntityStats owner, BattleRecoveryData data) : base(owner)
         {
@@ -30,7 +29,7 @@ namespace Core.Skill
             var hp = owner.GetAttribute(AttributeType.Hp);
             float hpHeal = hp.MaxValue * hpHealPercent;
             hp.Value += hpHeal;
-            _healPopup.CreateHealPopup(hpHeal, this.owner.transform.position);
+            TextPopupAction.HealPopup?.Invoke(hpHeal, this.owner.transform.position);
         }
     }
 

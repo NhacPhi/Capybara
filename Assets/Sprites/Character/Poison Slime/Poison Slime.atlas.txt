@@ -1,0 +1,18 @@
+Poison Slime.png
+size:318,531
+filter:Linear,Linear
+pma:true
+Body
+bounds:2,184,345,221
+offsets:2,2,348,225
+rotate:90
+Ellipse 1
+bounds:225,183,346,91
+offsets:1,1,348,93
+rotate:90
+Eye
+bounds:213,2,179,48
+rotate:90
+Inside
+bounds:2,45,209,137
+offsets:1,1,211,139

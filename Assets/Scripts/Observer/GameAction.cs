@@ -22,6 +22,7 @@ namespace Observer
         public static Action OnEnemyTurnStart;
         public static Action OnEndEnemyTurn;
         public static Action OnGachaAnimationDone;
+        public static Action OnBeforeCombat;
         
 #if UNITY_EDITOR
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

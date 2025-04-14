@@ -1,18 +1,22 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Observer;
 using Tech.Pooling;
 using UnityEngine;
+using UnityEngine.UIElements;
 using VContainer.Unity;
 
 namespace Core
 {
-    public class CombatText : IInitializable, IDisposable, IDamagePopup, IHealPopup
+    public class CombatText : IInitializable, IDisposable
     {
         public const string Address = "Damage Popup";
         private CombatTextUI popupPrefab;
 
         public void Initialize()
         {
+            TextPopupAction.DamagePopup += CreateDamagePopup;
+            TextPopupAction.HealPopup += CreateHealPopup;
             _ = WaitLoading();
         }
 
@@ -25,6 +29,7 @@ namespace Core
 
             var prefab = await AddressablesManager.Instance.LoadAssetAsync<GameObject>(Address);
             popupPrefab = prefab.GetComponent<CombatTextUI>();
+            AddressablesManager.Instance.RemoveAsset(Address);
         }
 
         public void CreateDamagePopup(float damage, Vector3 position)
@@ -47,9 +52,8 @@ namespace Core
         
         public void Dispose()
         {
-            if(!AddressablesManager.IsExist) return;
-            
-            AddressablesManager.Instance.RemoveAsset(Address);
+            TextPopupAction.DamagePopup -= CreateDamagePopup;
+            TextPopupAction.HealPopup -= CreateHealPopup;
         }
     }
 }

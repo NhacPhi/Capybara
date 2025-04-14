@@ -1,3 +1,6 @@
+using Core.Entities;
+using Newtonsoft.Json;
+using UnityEngine;
 using VContainer;
 
 namespace Event_System
@@ -6,6 +9,9 @@ namespace Event_System
     {
         [Inject] protected EventManager eventManager;
         public override EventType Type => EventType.Fight;
+        [JsonProperty("EnemyID")]
+        public string EnemyID;
+        [Inject] protected EnemyManager enemyManager;
         
         public override void HandleEvent()
         {
@@ -17,6 +23,8 @@ namespace Event_System
                 defaultHistoryItem.SetDay(eventTimeLine.CurrentDay)
                     .SetDescription(this.Description);
             }
+            
+            enemyManager.AddToSpawnList(EnemyID);
         }
     }
 }

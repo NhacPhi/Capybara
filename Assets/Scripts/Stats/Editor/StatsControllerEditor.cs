@@ -115,32 +115,39 @@ namespace Stats.Editor
 
 		private void InitBodyInEditor(StatsDataHolder statsHolder, StatsController controller)
 		{
-			var attributesView = new M_AttributeView();
-			var statsView = new M_StatView();
-
-
-			var labelAttribites = new Label(_allAttributes);
-			labelAttribites.style.fontSize = 12;
-			labelAttribites.style.unityFontStyleAndWeight = FontStyle.Bold;
-			attributesView.Body.Add(labelAttribites);
-
-			var labelStats = new Label(_allStats);
-			labelStats.style.fontSize = 12;
-			labelStats.style.unityFontStyleAndWeight = FontStyle.Bold;
-			statsView.Body.Add(labelStats);
-
-			foreach (AttributeType key in statsHolder.AttributeItems.Keys)
+			try
 			{
-				labelAttribites.text += key.ToString() + " | ";
-			}
+				var attributesView = new M_AttributeView();
+				var statsView = new M_StatView();
 
-			foreach (StatType key in statsHolder.StatItems.Keys)
+
+				var labelAttribites = new Label(_allAttributes);
+				labelAttribites.style.fontSize = 12;
+				labelAttribites.style.unityFontStyleAndWeight = FontStyle.Bold;
+				attributesView.Body.Add(labelAttribites);
+
+				var labelStats = new Label(_allStats);
+				labelStats.style.fontSize = 12;
+				labelStats.style.unityFontStyleAndWeight = FontStyle.Bold;
+				statsView.Body.Add(labelStats);
+
+				foreach (AttributeType key in statsHolder.AttributeItems.Keys)
+				{
+					labelAttribites.text += key.ToString() + " | ";
+				}
+				
+				foreach (StatType key in statsHolder.StatItems.Keys)
+				{
+					labelStats.text += key.ToString() + " | ";
+				}
+
+				_Body.Add(attributesView);
+				_Body.Add(statsView);
+			}
+			catch (Exception e)
 			{
-				labelStats.text += key.ToString() + " | ";
+				Debug.LogException(e);
 			}
-
-			_Body.Add(attributesView);
-			_Body.Add(statsView);
 		}
 	}
 }

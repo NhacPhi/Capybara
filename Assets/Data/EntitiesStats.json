@@ -13,14 +13,76 @@
             "Lv" : {"Max" : "MaxLv", "StartPercent" :  0.001 }
         }
     },
-    "enemy_01": {
+    "goblin": {
         "Stat": {
-            "Atk": 50,
-            "MaxHp" : 500,
-            "Def": 20
+            "Atk": 60,
+            "Def": 10,
+            "MaxHp": 180
         },
         "Attribute": {
-            "Hp": { "Max": "MaxHp" }
+            "Hp": {
+                "Max": "MaxHp"
+            }
+        }
+    },
+    "fire_bat": {
+        "Stat": {
+            "Atk": 72,
+            "Def": 15,
+            "MaxHp": 220
+        },
+        "Attribute": {
+            "Hp": {
+                "Max": "MaxHp"
+            }
+        }
+    },
+    "toxic_slime": {
+        "Stat": {
+            "Atk": 65,
+            "Def": 20,
+            "MaxHp": 280
+        },
+        "Attribute": {
+            "Hp": {
+                "Max": "MaxHp"
+            }
+        }
+    },
+    "bone_robbery": {
+        "Stat": {
+            "Atk": 80,
+            "Def": 22,
+            "MaxHp": 350
+        },
+        "Attribute": {
+            "Hp": {
+                "Max": "MaxHp"
+            }
+        }
+    },
+    "ghost_bear": {
+        "Stat": {
+            "Atk": 95,
+            "Def": 25,
+            "MaxHp": 400
+        },
+        "Attribute": {
+            "Hp": {
+                "Max": "MaxHp"
+            }
+        }
+    },
+    "bone_knight": {
+        "Stat": {
+            "Atk": 120,
+            "Def": 30,
+            "MaxHp": 800
+        },
+        "Attribute": {
+            "Hp": {
+                "Max": "MaxHp"
+            }
         }
     }
 }

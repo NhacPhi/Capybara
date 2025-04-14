@@ -24,6 +24,8 @@ namespace Core
 
         protected virtual void OnDestroy()
         {
+            if(!despawnTween.IsActive()) return;
+            
             despawnTween.Kill();
         }
     }

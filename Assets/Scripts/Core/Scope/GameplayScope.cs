@@ -2,6 +2,7 @@ using Core.Entities;
 using Core.Entities.Player;
 using Core.GameLoop;
 using Core.Skill;
+using Core.TurnBase;
 using Cysharp.Threading.Tasks;
 using Stats;
 using Tech.Json;
@@ -29,9 +30,10 @@ namespace Core.Scope
                 
             //Entry Point
             builder.RegisterEntryPoint<GameplayPreLoad>(Lifetime.Scoped).As<IPreload>();
-            builder.RegisterEntryPoint<CombatText>(Lifetime.Scoped).As<IDamagePopup, IHealPopup>();
+            builder.RegisterEntryPoint<CombatText>(Lifetime.Scoped);
             builder.RegisterEntryPoint<Gameloop>(Lifetime.Scoped).AsSelf();
             builder.RegisterEntryPoint<EnemyManager>(Lifetime.Scoped).AsSelf();
+            builder.RegisterEntryPoint<TurnManager>(Lifetime.Scoped).AsSelf();
             
             builder.RegisterBuildCallback(container =>
             {
@@ -48,9 +50,8 @@ namespace Core.Scope
                 await UniTask.Yield();
             }
 
-            var enemyManager = objectResolver.Resolve<EnemyManager>();
             PlayerCtrl = objectResolver.Instantiate(PlayerPrefab).GetComponent<PlayerCtrl>();
-            enemyManager.Player = PlayerCtrl;
+            objectResolver.Resolve<TurnManager>().Player = PlayerCtrl;
         }
     }
 }

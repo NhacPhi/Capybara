@@ -324,6 +324,7 @@
     {
       "$type": "Event_System.CombatEvent, Assembly-CSharp",
       "ID": 123,
+      "EnemyID" : "Poison Slime",
       "Description": "Phía Trước có kẻ địch chặn đường bạn đành chủ động ra đòn"
     }
   ],

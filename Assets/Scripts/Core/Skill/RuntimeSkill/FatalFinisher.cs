@@ -9,7 +9,6 @@ namespace Core.Skill
     public class FatalFinisher : SkillRuntime, IDisposable
     {
         private FatalFinisherData _data;
-        [Inject] private IHealPopup _healPopup;
         
         public FatalFinisher(EntityStats owner, FatalFinisherData data) : base(owner)
         {
@@ -22,13 +21,13 @@ namespace Core.Skill
             GameAction.OnEnemyDead -= HandleEnemyDead;
         }
 
-        private void HandleEnemyDead(EnemyCtrl enemy)
+        private void HandleEnemyDead(Entities.Enemy.EnemyCtrl enemy)
         {
             float hpPercentHeal =_data.Values[0] / 100;
             var hp = owner.GetAttribute(AttributeType.Hp);
             float hpAdd = hp.MaxValue * hpPercentHeal; 
             hp.Value += hpAdd;
-            _healPopup.CreateHealPopup(hpAdd, owner.transform.position);
+            TextPopupAction.HealPopup?.Invoke(hpAdd, this.owner.transform.position);
         }
 
         public override SkillData GetSkillData() => _data;

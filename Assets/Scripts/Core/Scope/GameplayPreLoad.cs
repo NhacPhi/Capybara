@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Stats;
 using System.Threading;
-using Core.Entities;
 using Core.Skill;
-using Tech.Json;
 using Tech.Pooling;
 using VContainer;
 using VContainer.Unity;
@@ -16,10 +14,8 @@ namespace Core.Scope
     {
         [Inject] private EventManager _eventManager;
         [Inject] private SkillDatabase _skillDatabase;
-        [Inject] private EnemyManager _enemyManager;
         [Inject] private EntitiesStatsDataBase _entitiesStatsData;
         [Inject] private IObjectResolver _objectResolver;
-        
         public bool IsDone;
 
         public async UniTask StartAsync(CancellationToken cancellation = default)
@@ -32,7 +28,6 @@ namespace Core.Scope
             var tasks = new List<UniTask>()
             {
                 _skillDatabase.Init(cancellation),
-                _enemyManager.Init(cancellation),
                 _entitiesStatsData.Init()
             };
             

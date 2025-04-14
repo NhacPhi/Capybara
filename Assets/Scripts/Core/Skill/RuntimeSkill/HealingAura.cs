@@ -10,7 +10,6 @@ namespace Core.Skill
         private HealingAuraData _data;
         private int _roundElapsed;
         private int _roundActiveEffect;
-        [Inject] private IHealPopup _healPopup;
         
         public HealingAura(EntityStats owner, HealingAuraData data) : base(owner)
         {
@@ -41,7 +40,7 @@ namespace Core.Skill
             float hpAdd = hp.MaxValue * hpHealPercent;
             hp.Value += hpAdd;
             _roundElapsed = 0;
-            _healPopup.CreateHealPopup(hpAdd, owner.transform.position);
+            TextPopupAction.HealPopup?.Invoke(hpAdd, this.owner.transform.position);
         }
 
         public override SkillData GetSkillData() => _data;

@@ -43,11 +43,7 @@ namespace Tech.Composite
 
             comp = GetComponentInChildren<T>();
 
-            if (comp)
-                return comp;
-
-            //LogCommon.LogWarning($"{typeof(T)} not found on {transform.name}");
-            return null;
+            return comp ? comp : null;
         }
 
         public T GetCoreComponent<T>(ref T value) where T : CoreComponent

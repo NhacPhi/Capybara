@@ -1,3 +1,5 @@
+using Observer;
+
 namespace Core.Entities.Enemy
 {
     public class EnemyStats : EntityStats
@@ -9,10 +11,10 @@ namespace Core.Entities.Enemy
             Renew();
         }
 
-        protected override void OnDeath()
+        protected override void HandleDeath()
         {
-            base.OnDeath();
-            //Return To Pool
+            base.HandleDeath();
+            GameAction.OnEnemyDead?.Invoke(core as EnemyCtrl);
             gameObject.SetActive(false);
         }
     }

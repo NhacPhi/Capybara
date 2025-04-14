@@ -9,7 +9,6 @@ namespace Core.Skill
     public class VitalityBoost : SkillRuntime, IDisposable
     {
         private VitalityBoostData _data;
-        [Inject] private IHealPopup _healPopup;
         private float _hpAdd;
         
         public VitalityBoost(EntityStats owner, VitalityBoostData data) : base(owner)
@@ -37,14 +36,14 @@ namespace Core.Skill
             owner.AddModifier(StatType.MaxHp, new Modifier(_hpAdd));
 
             hp.Value += _hpAdd;
-            _healPopup.CreateHealPopup(_hpAdd, this.owner.transform.position);
+            TextPopupAction.HealPopup?.Invoke(_hpAdd, this.owner.transform.position);
         }
         
         private void HandleCombatEnd()
         {
             owner.RemoveModifier(StatType.MaxHp, new Modifier(_hpAdd));    
             this.owner.GetAttribute(AttributeType.Hp).Value -= _hpAdd;
-            _healPopup.CreateHealPopup(-_hpAdd, this.owner.transform.position);
+            TextPopupAction.HealPopup?.Invoke(-_hpAdd, this.owner.transform.position);
         }
     }
 

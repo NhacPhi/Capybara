@@ -2,94 +2,61 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Core.Entities.Common;
 using Core.Entities.Enemy;
 using Core.Entities.Player;
+using Core.TurnBase;
 using Cysharp.Threading.Tasks;
 using Observer;
 using Tech.Pooling;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace Core.Entities
 {
-    public class EnemyManager : IDisposable
+    public class EnemyManager : IDisposable, IAsyncStartable
     {
-        private List<EnemyCtrl> _curEnemies = new ();
-        private EnemyCtrl _enemyPrefab;
+        [Inject] private TurnManager _turnManager;
         
-        //Test
-        private const string _enemyAddress = "enemy_01";
-        private Vector3 _enemySpawnPos = new Vector3(1.4f, 2.68f, 0);
+        private Dictionary<string, Entity> _enemiesData = new Dictionary<string, Entity>(); 
+        private List<Entity> _enemiesToSpawn = new List<Entity>();
         
-        public PlayerCtrl Player;
-        
-        public async UniTask Init(CancellationToken token = default)
-        {
-            GameAction.OnStartCombat += HandleStartCombat;
-            GameAction.OnEnemyDead += HandleEnemyDead;
-            GameAction.OnEnemyTurnStart += HandleEnemyTurn;
-            var prefab = await AddressablesManager.Instance.LoadAssetAsync<GameObject>(_enemyAddress, token: token);
-            _enemyPrefab = prefab.GetComponent<EnemyCtrl>();
-        }
-
         public void Dispose()
         {
             GameAction.OnStartCombat -= HandleStartCombat;
-            GameAction.OnEnemyDead -= HandleEnemyDead;
-            GameAction.OnEnemyTurnStart -= HandleEnemyTurn;
+        }
+
+        public async UniTask StartAsync(CancellationToken cancellation = default)
+        {
+            GameAction.OnStartCombat += HandleStartCombat;
+            var prefabs = await AddressablesManager.Instance.LoadAssetsAsync<GameObject>("Enemy", token: cancellation);
+
+            foreach (var prefab in prefabs)
+            {
+                _enemiesData.Add(prefab.name, prefab.GetComponent<Entity>());
+                await UniTask.Yield(cancellationToken: cancellation);
+            }
+        }
+
+        public void AddToSpawnList(string id)
+        {
+            if(!_enemiesData.TryGetValue(id, out Entity entity)) return;
+            
+            _enemiesToSpawn.Add(entity);
         }
         
-        private void HandleEnemyTurn()
-        {
-            _ = HandleTurn();
-        }
-
-        private async UniTask HandleTurn()
-        {
-            if (_curEnemies.Count == 0)
-            {
-                GameAction.OnCombatEnd?.Invoke();
-                return;
-            }
-            
-            int enemyIndex = 0;
-            bool waitAction = true;
-            var cancelToken = GameManager.GlobalTokenOnDestroy;
-            
-            EnemyCtrl curEnemy = null;
-            float waitTime = 0.1f;
-            while (enemyIndex <= _curEnemies.Count - 1)
-            {
-                if (waitAction)
-                {
-                    curEnemy = _curEnemies[enemyIndex];
-                    curEnemy.HandleTurn(this.Player);
-                    waitAction = false;
-                }
-                
-                await UniTask.WaitForSeconds(waitTime, cancellationToken: cancelToken);
-                
-                if(!curEnemy.EndTurn) continue;
-
-                enemyIndex++;
-                waitAction = true;
-            }
-            GameAction.OnEndEnemyTurn?.Invoke();
-        }
-        
-        private void HandleEnemyDead(EnemyCtrl enemy)
-        {
-            _curEnemies.Remove(enemy);
-        }
-
         private void HandleStartCombat()
         {
-            _curEnemies.Add(PoolManager.Instance.SpawnObject(_enemyPrefab, _enemySpawnPos, Quaternion.identity));
-        }
-
-
-        public EnemyCtrl GetFirstEnemy()
-        {
-            return _curEnemies.FirstOrDefault();
+            foreach (var entity in _enemiesToSpawn)
+            {
+                var enemy = PoolManager.Instance.SpawnObject(entity, 
+                    entity.transform.position, Quaternion.identity);
+                
+                _turnManager.RegisterEnemy(enemy);
+            }
+            
+            _enemiesToSpawn.Clear();
         }
     }
 }

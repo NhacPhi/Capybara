@@ -10,39 +10,31 @@ namespace Core
 {
     public class EntityStats : StatsController, IDamagable
     {
-        public Action OnDead;
-        public Action<DamageInfo> OnHit;
         public bool IsDead { get; protected set; }
+        public Action OnDeath { get; set; }
+        public Action<float, Transform> OnHit { get; set; }
         public EntitySkill Skill { get; protected set; }
-        [Inject] public IDamagePopup DamagePopup { get; private set; }
 
         protected virtual void Start()
         {
             Skill = this.core.GetCoreComponent<EntitySkill>();
         }
 
-        public virtual void TakeDamage(DamageInfo damageInfo)
+        public virtual void TakeDamage(float damage, Transform attacker)
         {
-            OnHit?.Invoke(damageInfo);
+            OnHit?.Invoke(damage, attacker);
             var hp = GetAttribute(AttributeType.Hp);
-            var def = GetStat(StatType.Def);
-            var damageOutput = Mathf.Clamp(damageInfo.Value - def.Value, 1f, int.MaxValue);
-
-            if (Skill)
-            {
-                Skill.ApplyDefenseSkill(ref damageOutput, damageInfo.Source, this);
-            }
+            hp.Value -= damage;
             
-            DamagePopup.CreateDamagePopup(damageOutput, this.transform.position);
-            hp.Value -= damageOutput;
             if (!(hp.Value <= 0)) return;
-            OnDeath();
+            
+            HandleDeath();
         }
 
-        protected virtual void OnDeath()
+        protected virtual void HandleDeath()
         {
             IsDead = true;
-            OnDead?.Invoke();
+            OnDeath?.Invoke();
         }
         
         public override void Renew()

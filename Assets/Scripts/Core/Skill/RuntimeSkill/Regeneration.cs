@@ -9,7 +9,6 @@ namespace Core.Skill
     {
         protected RegenerationData data;
         protected int activeRemaining;
-        [Inject] private IHealPopup _healPopup;
         
         public Regeneration(EntityStats owner, RegenerationData data) : base(owner)
         {
@@ -31,7 +30,7 @@ namespace Core.Skill
             float hpLost = hp.MaxValue - hp.Value;
             float hpHeal = hpLost * hpPercentHeal;
             hp.Value += hpHeal;
-            _healPopup.CreateHealPopup(hpHeal, this.owner.transform.position);
+            TextPopupAction.HealPopup?.Invoke(hpHeal, this.owner.transform.position);
             activeRemaining--;
         }
         

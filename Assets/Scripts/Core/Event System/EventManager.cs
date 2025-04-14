@@ -65,6 +65,7 @@ public class EventManager
                 evt = _eventDatabase.GetRandomEvent(EventType.Special);
                 break;
             case TimeLineType.FightRandom:
+                GameAction.OnBeforeCombat?.Invoke();
                 evt = _eventDatabase.GetRandomEvent(EventType.Fight);
                 callback = GameAction.OnStartCombat;
                 break;

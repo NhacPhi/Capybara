@@ -17,10 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 56d34c577e466704fa37571df9388eff
   m_SerializeEntries:
-  - m_GUID: ddcd2556ea00a7547aae017da3e0426b
-    m_Address: enemy_01
+  - m_GUID: 5f3a1dd34d32e8e4a8079f47d88f9262
+    m_Address: Assets/Prefabs/Entities/Enemy
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Enemy
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ea4547c5200e3e843b90aa8319ef7e6b
     m_Address: Damage Popup
