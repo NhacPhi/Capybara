@@ -323,8 +323,12 @@
   "Fight" : [
     {
       "$type": "Event_System.CombatEvent, Assembly-CSharp",
-      "ID": 123,
       "EnemyID" : "Poison Slime",
+      "Description": "Phía Trước có kẻ địch chặn đường bạn đành chủ động ra đòn"
+    },
+    {
+      "$type": "Event_System.CombatEvent, Assembly-CSharp",
+      "EnemyID" : "Bat",
       "Description": "Phía Trước có kẻ địch chặn đường bạn đành chủ động ra đòn"
     }
   ],

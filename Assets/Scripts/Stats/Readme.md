@@ -85,3 +85,4 @@ Apply Effect On Entity Can Stackable
 ```
 public void ApplyEffect(YourStatusEffect effect)
 ```
+#KatTheDev

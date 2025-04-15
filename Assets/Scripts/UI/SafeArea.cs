@@ -7,6 +7,11 @@ public class SafeArea : MonoBehaviour
         ResetSafeArea();
     }
 
+    private void OnRectTransformDimensionsChange()
+    {
+        ResetSafeArea();
+    }
+
     public void ResetSafeArea()
     {
         RectTransform rectTransform = GetComponent<RectTransform>();

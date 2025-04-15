@@ -36,14 +36,12 @@ namespace Tech.Composite
         public T GetCoreComponent<T>() where T : CoreComponent
         {
             Initialize();
-            var comp = _coreComponents.OfType<T>().FirstOrDefault();
-
-            if (comp)
-                return comp;
-
-            comp = GetComponentInChildren<T>();
-
-            return comp ? comp : null;
+            foreach (var component in _coreComponents)
+            {
+                if(component is T TComponent) return TComponent;
+            }
+            
+            return default;
         }
 
         public T GetCoreComponent<T>(ref T value) where T : CoreComponent
@@ -65,6 +63,7 @@ namespace Tech.Composite
 
             return null;
         }
+        
         public List<T> GetCoreComponents<T>() where T : CoreComponent
         {
             Initialize();

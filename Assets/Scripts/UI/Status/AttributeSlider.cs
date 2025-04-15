@@ -31,7 +31,7 @@ public class AttributeSlider : AttributeTextValue
         SetUpValue();
     }
 
-    private void SetUpValue()
+    protected virtual void SetUpValue()
     {
         float ratio = this.LastValue / this.LastMaxValue;
         var stringBuilder = GenericPool<StringBuilder>.Get().Clear();
