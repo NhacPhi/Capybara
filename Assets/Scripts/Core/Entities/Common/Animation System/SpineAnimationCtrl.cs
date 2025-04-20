@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
 
-[RequireComponent(typeof(SkeletonAnimation))]
 public class SpineAnimationCtrl : AnimationSystemBase
 {
-    protected SkeletonAnimation skeletonAnimation;
+    protected IAnimationStateComponent animationState;
     protected MeshRenderer meshRenderer;
     protected List<(float normalizedTime, Action callback)> callbacks = new List<(float normalizedTime, Action callback)>();
     
     public override void Play(AnimationData data)
     {
-        var trackEntry = skeletonAnimation.AnimationState.SetAnimation(data.Layer, data.AnimationName, data.IsLoop);
+        var trackEntry = animationState.AnimationState.SetAnimation(data.Layer, data.AnimationName, data.IsLoop);
         trackEntry.MixDuration = data.Transition;
         trackEntry.TimeScale = data.TimeScale;
     }
@@ -27,10 +26,10 @@ public class SpineAnimationCtrl : AnimationSystemBase
     {
         if(callbacks.Count == 0) return;
         
-        var currentTrackEntry = skeletonAnimation.AnimationState.GetCurrent(0);
+        var currentTrackEntry = animationState.AnimationState.GetCurrent(0);
 
         float currentNormalizedTime = Mathf.Repeat(currentTrackEntry.TrackTime / currentTrackEntry.Animation.Duration, 1);
-
+        
         for (int i = callbacks.Count - 1; i >= 0; i--)
         {
             var tuple = callbacks[i];
@@ -47,10 +46,15 @@ public class SpineAnimationCtrl : AnimationSystemBase
         get => meshRenderer.sortingOrder; 
         set => meshRenderer.sortingOrder = value; 
     }
-    
+
+    public override void ResetToDefault(int layer = 0, float transition = 0f)
+    {
+        animationState.AnimationState.SetEmptyAnimation(layer, transition);
+    }
+
     public override void LoadComponent()
     {
-        skeletonAnimation = GetComponent<SkeletonAnimation>();
+        animationState = GetComponent<IAnimationStateComponent>();
         meshRenderer = GetComponent<MeshRenderer>();
     }
 }

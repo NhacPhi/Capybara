@@ -15,17 +15,17 @@ public class Round : MonoBehaviour
     {
         this.gameObject.SetActive(false);
         _textMesh = GetComponent<TextMeshProUGUI>();
-        GameAction.OnCombatEnd += HandleCombatEnd;
-        GameAction.OnStartCombat += HandleStartCombat;
-        GameAction.OnRoundStart += HandleRoundStart;
-        GameAction.OnRoundChange += HandleRoundChange;
+        EventAction.OnCombatEnd += HandleCombatEnd;
+        EventAction.OnStartCombat += HandleStartCombat;
+        EventAction.OnRoundStart += HandleRoundStart;
+        EventAction.OnRoundChange += HandleRoundChange;
     }
 
     private void OnDestroy()
     {
-        GameAction.OnStartCombat -= HandleStartCombat;
-        GameAction.OnCombatEnd -= HandleCombatEnd;
-        GameAction.OnRoundChange -= HandleRoundChange;
+        EventAction.OnStartCombat -= HandleStartCombat;
+        EventAction.OnCombatEnd -= HandleCombatEnd;
+        EventAction.OnRoundChange -= HandleRoundChange;
     }
     
     private void HandleStartCombat()

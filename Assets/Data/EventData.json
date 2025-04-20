@@ -66,17 +66,19 @@
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_01",
       "Description": "Stepped on a Thorn",
+      "Category" : "BadLuck",
       "Modifier": [
         {
           "$type": "Event_System.AttributeModify, Assembly-CSharp",
           "AttributeType": "Hp",
-          "Value": -20
+          "Value": -10
         }
       ]
     },
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_02",
+      "Category" : "Normal",
       "Description": "Found a Shiny Coin",
       "Modifier": [
         {
@@ -88,12 +90,13 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_03",
+      "Category" : "Normal",
       "Description": "Challenged by a Squirrel",
       "Modifier": [
         {
           "$type": "Event_System.AttributeModify, Assembly-CSharp",
           "AttributeType": "Hp",
-          "Value": -10
+          "Value": 10
         },
         {
           "$type": "Event_System.AttributeModify, Assembly-CSharp",
@@ -105,6 +108,7 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_04",
+      "Category" : "Normal",
       "Description": "Tasty Leaves Buffet",
       "Modifier": [
         {
@@ -117,18 +121,20 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_05",
+      "Category" : "BadLuck",
       "Description": "Fell from a Small Rock",
       "Modifier": [
         {
           "$type": "Event_System.AttributeModify, Assembly-CSharp",
           "AttributeType": "Hp",
-          "Value": -15
+          "Value": -5
         }
       ]
     },
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_06",
+      "Category" : "Normal",
       "Description": "Training with a Tree Trunk",
       "Modifier": [
         {
@@ -141,6 +147,7 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_07",
+      "Category" : "BadLuck",
       "Description": "Got Stung by Bees",
       "Modifier": [
         {
@@ -158,6 +165,7 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_08",
+      "Category" : "Normal",
       "Description": "Helped a Lost Bird",
       "Modifier": [
         {
@@ -170,6 +178,7 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_09",
+      "Category" : "Normal",
       "Description": "Rusty Armor Discovery",
       "Modifier": [
         {
@@ -182,6 +191,7 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_10",
+      "Category" : "MinorWin",
       "Description": "Hidden Berry Stash",
       "Modifier": [
         {
@@ -194,6 +204,7 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_11",
+      "Category" : "MinorWin",
       "Description": "Won a Log-Pushing Contest",
       "Modifier": [
         {
@@ -211,6 +222,7 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_12",
+      "Category" : "MinorWin",
       "Description": "Sold Shiny Pebbles",
       "Modifier": [
         {
@@ -222,6 +234,7 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_13",
+      "Category" : "BigWin",
       "Description": "Discovered Ancient Capy Scrolls",
       "Modifier": [
         {
@@ -239,6 +252,7 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_14",
+      "Category" : "BigWin",
       "Description": "Found a Buried Treasure Box",
       "Modifier": [
         {
@@ -250,6 +264,7 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_15",
+      "Category" : "BigWin",
       "Description": "Mastered Bamboo Smashing",
       "Modifier": [
         {
@@ -262,6 +277,7 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_16",
+      "Category" : "Jackpot",
       "Description": "Capybara Enlightenment",
       "Modifier": [
         {
@@ -279,6 +295,7 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_17",
+      "Category" : "Jackpot",
       "Description": "Golden Leaf Miracle",
       "Modifier": [
         {
@@ -295,17 +312,13 @@
     {
       "$type": "Event_System.PassiveEvent, Assembly-CSharp",
       "ID": "passive_18",
+      "Category" : "Jackpot",
       "Description": "Blessing of the Forest Spirits",
       "Modifier": [
         {
-          "$type": "Event_System.StatModify, Assembly-CSharp",
-          "StatType": "Atk",
-          "Value": 30
-        },
-        {
-          "$type": "Event_System.StatModify, Assembly-CSharp",
-          "StatType": "Def",
-          "Value": 30
+          "$type": "Event_System.AttributeModify, Assembly-CSharp",
+          "AttributeType": "Hp",
+          "Value": 100
         },
         {
           "$type": "Event_System.MoneyModify, Assembly-CSharp",

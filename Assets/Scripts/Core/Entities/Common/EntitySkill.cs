@@ -17,7 +17,7 @@ namespace Core.Entities.Common
         protected override void Awake()
         {
             base.Awake();
-            GameAction.OnCombatEnd += HandleCombatEnd;
+            EventAction.OnCombatEnd += HandleCombatEnd;
         }
 
         private void Start()
@@ -27,7 +27,7 @@ namespace Core.Entities.Common
 
         private void OnDestroy()
         {
-            GameAction.OnCombatEnd -= HandleCombatEnd;
+            EventAction.OnCombatEnd -= HandleCombatEnd;
             foreach (var skill in _skillDict.Values)
             {
                 if (skill is IDisposable disposable)

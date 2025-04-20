@@ -65,9 +65,9 @@ public class EventManager
                 evt = _eventDatabase.GetRandomEvent(EventType.Special);
                 break;
             case TimeLineType.FightRandom:
-                GameAction.OnBeforeCombat?.Invoke();
+                EventAction.OnBeforeCombat?.Invoke();
                 evt = _eventDatabase.GetRandomEvent(EventType.Fight);
-                callback = GameAction.OnStartCombat;
+                callback = EventAction.OnStartCombat;
                 break;
             case TimeLineType.Boss:
                 evt = _eventDatabase.GetRandomEvent(EventType.Boss);
@@ -75,6 +75,6 @@ public class EventManager
         }
         
         _objectResolver.Inject(evt);
-        GameAction.OnEvent?.Invoke(evt, callback);
+        EventAction.OnEvent?.Invoke(evt, callback);
     }
 }

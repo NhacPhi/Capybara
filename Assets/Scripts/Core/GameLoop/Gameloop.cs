@@ -23,12 +23,12 @@ namespace Core.GameLoop
             _stateMachine.AddNewState(GameState.Win, new WinState(_stateMachine));
             _stateMachine.AddNewState(GameState.WaitCombat, new WaitCombatState(_stateMachine));
             _stateMachine.Initialize(GameState.WaitCombat);
-            GameAction.OnNextDay += NextDay;
+            EventAction.OnNextDay += NextDay;
         }
 
         public void Dispose()
         {
-            GameAction.OnNextDay -= NextDay;
+            EventAction.OnNextDay -= NextDay;
         }
 
         public void Tick()

@@ -14,15 +14,15 @@ namespace Core.Skill
         public VitalityBoost(EntityStats owner, VitalityBoostData data) : base(owner)
         {
             _data = data;
-            GameAction.OnStartCombat += HandleStartCombat;
-            GameAction.OnCombatEnd += HandleCombatEnd;
+            EventAction.OnStartCombat += HandleStartCombat;
+            EventAction.OnCombatEnd += HandleCombatEnd;
         }
 
 
         public void Dispose()
         {
-            GameAction.OnStartCombat -= HandleStartCombat;
-            GameAction.OnCombatEnd -= HandleCombatEnd;
+            EventAction.OnStartCombat -= HandleStartCombat;
+            EventAction.OnCombatEnd -= HandleCombatEnd;
         }
         
         public override SkillData GetSkillData() => _data;

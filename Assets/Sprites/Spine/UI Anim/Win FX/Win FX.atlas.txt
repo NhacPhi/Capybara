@@ -1,0 +1,35 @@
+Win FX.png
+size:2010,1701
+filter:Linear,Linear
+pma:true
+BW Glow 1
+bounds:1258,1247,750,452
+offsets:147,151,997,641
+BW Glow 2
+bounds:2,653,1046,806
+offsets:1,1,1048,849
+rotate:90
+Bad Luck
+bounds:584,15,548,143
+offsets:1,1,550,145
+Big Win
+bounds:1258,729,475,128
+JP Glow 1
+bounds:1083,247,834,421
+offsets:32,14,905,456
+JP Glow 2
+bounds:2,160,1079,491
+offsets:10,6,1110,528
+JP Glow 3
+bounds:810,670,1029,446
+offsets:12,5,1050,463
+rotate:90
+Jackpot
+bounds:2,17,580,141
+offsets:1,1,582,143
+MW Glow
+bounds:1258,859,724,386
+offsets:29,29,773,424
+Minor Win
+bounds:1134,2,744,243
+offsets:11,13,766,265

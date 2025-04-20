@@ -12,7 +12,9 @@ namespace Event_System
         [Inject] protected EventManager eventManager;
         
         [JsonProperty("Modifier")]
-        public BaseModifyValue[] ModifyValues { get; private set; } = null;
+        public BaseModifyValue[] ModifyValues { get; private set; }
+        [JsonProperty("Category")]
+        public PassiveEventCategory Category { get; private set; }
         
         public override void HandleEvent()
         {

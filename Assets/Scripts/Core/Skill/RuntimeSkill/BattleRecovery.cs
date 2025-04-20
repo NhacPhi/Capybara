@@ -12,12 +12,12 @@ namespace Core.Skill
         public BattleRecovery(EntityStats owner, BattleRecoveryData data) : base(owner)
         {
             this.data = data;
-            GameAction.OnCombatEnd += HandleCombatEnd;
+            EventAction.OnCombatEnd += HandleCombatEnd;
         }
 
         public void Dispose()
         {
-            GameAction.OnCombatEnd -= HandleCombatEnd;
+            EventAction.OnCombatEnd -= HandleCombatEnd;
         }
 
         public override SkillData GetSkillData() => data;

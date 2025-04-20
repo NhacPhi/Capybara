@@ -14,12 +14,12 @@ namespace Core.Skill
         {
             this.data = data;
             activeRemaining = (int)data.Values[1];
-            GameAction.OnStartCombat += HandleStart;
+            EventAction.OnStartCombat += HandleStart;
         }
 
         public void Dispose()
         {
-            GameAction.OnStartCombat -= HandleStart;
+            EventAction.OnStartCombat -= HandleStart;
         }
 
         private void HandleStart()

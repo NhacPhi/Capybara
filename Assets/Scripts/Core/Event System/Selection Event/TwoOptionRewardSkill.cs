@@ -81,7 +81,7 @@ namespace Event_System
 
         private void PopulatePanel(UIManager uiManager, EntitySkill skill)
         {
-            GameAction.OnPlayerSelect?.Invoke();
+            EventAction.OnPlayerSelect?.Invoke();
             var panel = uiManager.GetFirstPanelOfType<ChooseSkillPanel>();
             panel.Show();
             panel.PopulateRandomSkill(skill);

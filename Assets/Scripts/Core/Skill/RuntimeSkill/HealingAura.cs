@@ -15,14 +15,14 @@ namespace Core.Skill
         {
             _data = data;
             _roundActiveEffect = (int)data.Values[0];
-            GameAction.OnRoundChange += HandeRoundChange;
-            GameAction.OnStartCombat += HandleStartCombat;
+            EventAction.OnRoundChange += HandeRoundChange;
+            EventAction.OnStartCombat += HandleStartCombat;
         }
 
         public void Dispose()
         {
-            GameAction.OnRoundChange -= HandeRoundChange;
-            GameAction.OnStartCombat -= HandleStartCombat;
+            EventAction.OnRoundChange -= HandeRoundChange;
+            EventAction.OnStartCombat -= HandleStartCombat;
         }
         
         private void HandleStartCombat()

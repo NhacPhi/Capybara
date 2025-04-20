@@ -1,11 +1,9 @@
-using System;
-using System.Linq;
 using Core.Scope;
-using Event_System;
 using Observer;
 using UI.UI_Manager;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
 using VContainer;
 
 namespace UI
@@ -14,68 +12,61 @@ namespace UI
     {
         [field: SerializeField] public Button NextDayBtn { get; private set; }
         [field: SerializeField] public Image IncombatImage { get; private set; }
-        [field: SerializeField] public SelectionEventGroup SelectionGroup {get; private set;}
+        [field: SerializeField] public SelectionEventGroup SelectionGroup { get; private set;}
         [Inject] private IPreload _preLoadProgress;
         
+#if UNITY_EDITOR
         private void Reset()
         {
             var allTransform = GetComponentsInChildren<Transform>(true);
             
             if (!NextDayBtn)
-            {
-                NextDayBtn = allTransform.FirstOrDefault(x => x.name.ToLower().Contains("next day"))
-                    .GetComponentInChildren<Button>();
-            }
+                NextDayBtn = allTransform.FindFrist<Button>("next day");
 
             if (!IncombatImage)
-            {
-                IncombatImage = allTransform.FirstOrDefault(x => x.name.ToLower().Contains("combat"))
-                    .GetComponentInChildren<Image>();
-            }
+                IncombatImage = allTransform.FindFrist<Image>("combat");
             
             SelectionGroup = GetComponentInChildren<SelectionEventGroup>(true);
-
-            _preLoadProgress.OnLoadDone += () =>
-            {
-                NextDayBtn.gameObject.SetActive(true);
-            };
         }
+#endif
 
         private void Awake()
         {
-            NextDayBtn.gameObject.SetActive(true);
-
-            if (!SelectionGroup)
-            {
-                SelectionGroup = GetComponentInChildren<SelectionEventGroup>();
-            }
-
-  //          GameAction.OnSelectionEvent += HandleSelectionEvent;
-            GameAction.OnStartCombat += HandleStartCombat;
-            GameAction.OnCombatEnd += HandleCombatEnd;
-            GameAction.OnSelectionEventDone += HandleSelectionEventDone;
-            GameAction.OnEvent += HandleEvent;
-            GameAction.OnGachaAnimationDone += HandleGachaDone;
+            LoadComponent();
+            RegisterEvent();
         }
 
         private void OnDestroy()
         {
-//            GameAction.OnSelectionEvent -= HandleSelectionEvent;
-            GameAction.OnStartCombat -= HandleStartCombat;
-            GameAction.OnCombatEnd -= HandleCombatEnd;
-            GameAction.OnSelectionEventDone -= HandleSelectionEventDone;
-            GameAction.OnEvent -= HandleEvent;
-            GameAction.OnGachaAnimationDone -= HandleGachaDone;
+            DisposeEvent();
         }
         
-        private void HandleGachaDone()
+        private void LoadComponent()
         {
-            NextDayBtn.gameObject.SetActive(true);
+            if (!SelectionGroup)
+                SelectionGroup = GetComponentInChildren<SelectionEventGroup>();
+                
+            if (_preLoadProgress != null)
+                _preLoadProgress.OnLoadDone += () => { NextDayBtn.gameObject.SetActive(true); };
         }
-        
-        private void HandleEvent(EventBase evt, Action callback)
+
+
+        private void RegisterEvent()
         {
-            NextDayBtn.gameObject.SetActive(false);
+            //GameAction.OnSelectionEvent += HandleSelectionEvent;
+            EventAction.OnStartCombat += HandleStartCombat;
+            EventAction.OnCombatEnd += HandleCombatEnd;
+            EventAction.OnSelectionEventDone += HandleSelectionEventDone;
+        }
+
+
+        private void DisposeEvent()
+        {
+            //GameAction.OnSelectionEvent -= HandleSelectionEvent;
+            EventAction.OnStartCombat -= HandleStartCombat;
+            EventAction.OnCombatEnd -= HandleCombatEnd;
+            EventAction.OnSelectionEventDone -= HandleSelectionEventDone;
+           
         }
         
         private void HandleCombatEnd()

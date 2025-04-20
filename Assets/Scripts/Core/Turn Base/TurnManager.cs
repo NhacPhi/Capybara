@@ -29,15 +29,15 @@ namespace Core.TurnBase
         public void Initialize()
         {
             _isEnd = true;
-            GameAction.OnStartCombat += HandleStartCombat;
-            GameAction.OnEnemyDead += HandleEnemyDead;
+            EventAction.OnStartCombat += HandleStartCombat;
+            EventAction.OnEnemyDead += HandleEnemyDead;
         }
 
         public void Dispose()
         {
             DisposeSource();
-            GameAction.OnEnemyDead -= HandleEnemyDead;
-            GameAction.OnStartCombat -= HandleStartCombat;
+            EventAction.OnEnemyDead -= HandleEnemyDead;
+            EventAction.OnStartCombat -= HandleStartCombat;
         }
         
         private void HandleEnemyDead(EnemyCtrl enemy)
@@ -60,7 +60,7 @@ namespace Core.TurnBase
             CurEnemiesTurnIndex = 0;
             _isEnd = false;
             CurrentRound = 1;
-            GameAction.OnRoundStart?.Invoke(CurrentRound, MaxRound);
+            EventAction.OnRoundStart?.Invoke(CurrentRound, MaxRound);
             _ = Loop();
         }
 
@@ -100,7 +100,7 @@ namespace Core.TurnBase
         private void EndCombat()
         {
             _isEnd = true;
-            GameAction.OnCombatEnd?.Invoke();
+            EventAction.OnCombatEnd?.Invoke();
             DisposeSource();
         }
 
@@ -128,17 +128,17 @@ namespace Core.TurnBase
                 {
                     CurEnemiesTurnIndex = 0;
                     CurrentRound++;
-                    GameAction.OnRoundChange?.Invoke(CurrentRound);
+                    EventAction.OnRoundChange?.Invoke(CurrentRound);
                 }
                 
-                GameAction.OnEndEnemyTurn?.Invoke();
+                EventAction.OnEndEnemyTurn?.Invoke();
                 Player.HandleTurn(_enemies.FirstOrDefault());
                 IsEnemeyTurn = false;
                 return;
             }
             
             IsEnemeyTurn = true;
-            GameAction.OnEndPlayerTurn?.Invoke();
+            EventAction.OnEndPlayerTurn?.Invoke();
             _enemies[CurEnemiesTurnIndex].HandleTurn(Player);
         }
         

@@ -24,12 +24,12 @@ namespace Core.Entities
         
         public void Dispose()
         {
-            GameAction.OnStartCombat -= HandleStartCombat;
+            EventAction.OnStartCombat -= HandleStartCombat;
         }
 
         public async UniTask StartAsync(CancellationToken cancellation = default)
         {
-            GameAction.OnStartCombat += HandleStartCombat;
+            EventAction.OnStartCombat += HandleStartCombat;
             var prefabs = await AddressablesManager.Instance.LoadAssetsAsync<GameObject>("Enemy", token: cancellation);
 
             foreach (var prefab in prefabs)

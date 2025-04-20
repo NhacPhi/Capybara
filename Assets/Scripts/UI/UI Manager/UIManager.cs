@@ -6,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using VContainer;
 using VContainer.Unity;
 
+[DefaultExecutionOrder(-100)]
 public class UIManager : MonoBehaviour
 {
     [Inject] private IObjectResolver _objectResolver;

@@ -7,12 +7,12 @@ namespace Core.GameLoop
     {
         public WaitCombatState(StateMachine<GameState, GameStateBase> stateMachine) : base(stateMachine)
         {
-            GameAction.OnStartCombat += SwitchToCombatState;
+            EventAction.OnStartCombat += SwitchToCombatState;
         }
 
         ~WaitCombatState()
         {
-            GameAction.OnStartCombat -= SwitchToCombatState;
+            EventAction.OnStartCombat -= SwitchToCombatState;
         }
         
         private void SwitchToCombatState()

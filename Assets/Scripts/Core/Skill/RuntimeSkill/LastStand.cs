@@ -16,12 +16,12 @@ namespace Core.Skill
         public LastStand(EntityStats owner, LastStandData data) : base(owner)
         {
             this.data = data;
-            GameAction.OnRoundChange += HandleRoundChange;
+            EventAction.OnRoundChange += HandleRoundChange;
         }
         
         public void Dispose()
         {
-            GameAction.OnRoundChange -= HandleRoundChange;
+            EventAction.OnRoundChange -= HandleRoundChange;
         }
         
         private void HandleRoundChange(int curRound)

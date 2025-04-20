@@ -49,7 +49,7 @@ namespace UI
                         item.SetDescription(rewardMessage + skillItem.SkillData.Name);
                     }
                     
-                    GameAction.OnSelectionEventDone?.Invoke();
+                    EventAction.OnSelectionEventDone?.Invoke();
                 });
             }
         }

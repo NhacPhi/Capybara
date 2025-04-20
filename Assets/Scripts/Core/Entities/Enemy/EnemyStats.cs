@@ -14,7 +14,7 @@ namespace Core.Entities.Enemy
         protected override void HandleDeath()
         {
             base.HandleDeath();
-            GameAction.OnEnemyDead?.Invoke(core as EnemyCtrl);
+            EventAction.OnEnemyDead?.Invoke(core as EnemyCtrl);
             gameObject.SetActive(false);
         }
     }

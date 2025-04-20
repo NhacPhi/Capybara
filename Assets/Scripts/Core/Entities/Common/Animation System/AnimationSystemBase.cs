@@ -6,6 +6,7 @@ public abstract class AnimationSystemBase : CoreComponent
     public abstract void Play(AnimationData data);
     public abstract void RegisterEventAtTime(float normalizedTime, Action onEventTriggered);
     public abstract int OrderInLayer { get; set; }
+    public abstract void ResetToDefault(int layer = 0, float transition = 0f);
 }
 
 public class AnimationData

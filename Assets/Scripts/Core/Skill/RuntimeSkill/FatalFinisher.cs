@@ -13,12 +13,12 @@ namespace Core.Skill
         public FatalFinisher(EntityStats owner, FatalFinisherData data) : base(owner)
         {
             _data = data;
-            GameAction.OnEnemyDead += HandleEnemyDead;
+            EventAction.OnEnemyDead += HandleEnemyDead;
         }
         
         public void Dispose()
         {
-            GameAction.OnEnemyDead -= HandleEnemyDead;
+            EventAction.OnEnemyDead -= HandleEnemyDead;
         }
 
         private void HandleEnemyDead(Entities.Enemy.EnemyCtrl enemy)

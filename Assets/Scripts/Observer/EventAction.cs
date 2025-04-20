@@ -1,15 +1,16 @@
 using System;
 using System.Reflection;
 using Core.Entities.Enemy;
+using Event_System;
 using UnityEngine;
 
 namespace Observer
 {
-    public static class GameAction
+    public static class EventAction
     {
         public static Action OnNextDay;
         public static Action OnSelectionEvent;
-        public static Action<Event_System.EventBase, Action> OnEvent;
+        public static Action<EventBase, Action> OnEvent;
         public static Action OnSelectionEventDone;
         public static Action OnPlayerSelect;
         public static Action OnStartCombat;
@@ -23,6 +24,7 @@ namespace Observer
         public static Action OnEndEnemyTurn;
         public static Action OnGachaAnimationDone;
         public static Action OnBeforeCombat;
+        public static Action<EventBase> OnBeforeEventHandle;
         
 #if UNITY_EDITOR
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

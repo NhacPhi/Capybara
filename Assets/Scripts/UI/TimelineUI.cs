@@ -48,13 +48,13 @@ namespace UI
         private void Awake()
         {
             TimelineAction.OnInitTimeline += HandleInit;
-            GameAction.OnNextDay += HandleNextDay;
+            EventAction.OnNextDay += HandleNextDay;
         }
 
         private void OnDestroy()
         {
             TimelineAction.OnInitTimeline -= HandleInit;
-            GameAction.OnNextDay -= HandleNextDay;
+            EventAction.OnNextDay -= HandleNextDay;
         }
         private void HandleInit(int currentDay, int dayAmount)
         {
