@@ -6,7 +6,6 @@ using Core.Entities.Common;
 using Core.Entities.Enemy;
 using Cysharp.Threading.Tasks;
 using Observer;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace Core.TurnBase
@@ -119,7 +118,6 @@ namespace Core.TurnBase
 
         private void EndTurn()
         {
-            
             if(IsEnemeyTurn)
             {
                 CurEnemiesTurnIndex++;

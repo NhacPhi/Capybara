@@ -21,7 +21,7 @@ namespace Core.Damage
             GetStatsAndSkillSystem(source, out var sourceStats, out var sourceSkill);
             GetStatsAndSkillSystem(target, out var targetStats, out var targetSkill);
             
-            if(!sourceStats || !targetStats) return;
+            if(sourceStats == null || targetStats == null) return;
             
             var sourceAtk = sourceStats.GetStat(StatType.Atk);
           
@@ -45,9 +45,10 @@ namespace Core.Damage
         }
         
         private static void GetStatsAndSkillSystem(Tech.Composite.Core core,
-            out EntityStats entityStats, out EntitySkill entitySkill)
+            out IDamagable entityStats, out EntitySkill entitySkill)
         {
-            entityStats = core.GetCoreComponent<EntityStats>();
+            entityStats = core.GetCoreComponent<IDamagable>();
+            //Need Change Skill To Interface
             entitySkill = core.GetCoreComponent<EntitySkill>();
         }
     }

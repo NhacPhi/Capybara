@@ -32,6 +32,7 @@ namespace Core.Entities.Player
 
         private void CallEvent()
         {
+            //Test Stats
             var hp = GetAttribute(AttributeType.Hp);
             var exp = GetAttribute(AttributeType.Exp);
             var expToLvUp = GetStat(StatType.ExpToLevelUp);

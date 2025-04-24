@@ -33,7 +33,7 @@ namespace Tech.Composite
             _coreComponents.Add(component);
         }
         
-        public T GetCoreComponent<T>() where T : CoreComponent
+        public T GetCoreComponent<T>()
         {
             Initialize();
             foreach (var component in _coreComponents)
@@ -42,12 +42,6 @@ namespace Tech.Composite
             }
             
             return default;
-        }
-
-        public T GetCoreComponent<T>(ref T value) where T : CoreComponent
-        {
-            value = GetCoreComponent<T>();
-            return value;
         }
 
         public T GetCoreComponent<T>(string objName) where T : CoreComponent
@@ -64,7 +58,7 @@ namespace Tech.Composite
             return null;
         }
         
-        public List<T> GetCoreComponents<T>() where T : CoreComponent
+        public List<T> GetCoreComponents<T>()
         {
             Initialize();
             return _coreComponents.OfType<T>().ToList();

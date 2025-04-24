@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Core.Entities.Common;
-using Core.Entities.Enemy;
-using Core.Entities.Player;
 using Core.TurnBase;
 using Cysharp.Threading.Tasks;
 using Observer;

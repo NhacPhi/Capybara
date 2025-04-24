@@ -2,6 +2,7 @@ using Core.Scope;
 using Observer;
 using UI.UI_Manager;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Utilities;
 using VContainer;
@@ -66,7 +67,6 @@ namespace UI
             EventAction.OnStartCombat -= HandleStartCombat;
             EventAction.OnCombatEnd -= HandleCombatEnd;
             EventAction.OnSelectionEventDone -= HandleSelectionEventDone;
-           
         }
         
         private void HandleCombatEnd()

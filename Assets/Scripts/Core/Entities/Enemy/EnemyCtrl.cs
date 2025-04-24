@@ -1,5 +1,4 @@
 using Core.Entities.Common;
-using UnityEngine;
 
 namespace Core.Entities.Enemy
 {
